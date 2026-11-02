@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Plan Xcaret · Enero 2027</title>
-<meta property="og:title" content="Plan del grupo · Hotel Xcaret México · 10–17 ene 2027">
-<meta property="og:description" content="El plan de Julián día a día, con horarios, traslados y qué puede hacer cada niño.">
+<meta property="og:title" content="Plan final del grupo · Hotel Xcaret México · 10–17 ene 2027">
+<meta property="og:description" content="El plan final día a día, con horarios, traslados y qué puede hacer cada niño.">
 <meta name="theme-color" content="#111113">
 <style>
 :root{
@@ -109,8 +109,8 @@ textarea{width:100%;min-height:180px;border:1px solid var(--line);border-radius:
 <body>
 <header><div class="wrap">
   <div class="eyebrow">Hotel Xcaret México · 10–17 enero 2027</div>
-  <h1>Plan del grupo</h1>
-  <p>Propuesta de Julián, día a día, con horarios del hotel, traslados y qué puede hacer cada niño.</p>
+  <h1>Plan final del grupo</h1>
+  <p>Plan acordado con Julián, día a día, con horarios del hotel, traslados y qué puede hacer cada niño.</p>
 </div></header>
 <div class="who"><div class="wrap">
   <label for="fam">¿Quién eres? (así te muestro tu plan)</label>
@@ -249,7 +249,7 @@ var ADJ = {
      {s:"man",t:"Llegada e instalación",d:"Se puede usar todo el hotel desde las 7:00 a. m. del día de llegada."},
      {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
      {s:"tar",t:"Hotel: piscina niños"},
-     {s:"cen",t:"Xin-Gao — experiencia Fusión",a:"xingao",at:"17:30",d:"Comer en una hora y salir a las 6:30 p. m. hacia La Xentral: shuttle «La Despeinada» al Parque Xcaret cada 30 min (~10–15 min).",c:"Propuesta de Julián: el buffet del parque a esa hora no es tan bueno. Se reserva Fusión porque abre a las 5:30; el Teppanyaki abre a las 6 y queda para el jueves."},
+     {s:"cen",t:"Buffet en el Parque Xcaret (antes del show)",a:"xcaret",d:"Shuttle «La Despeinada» desde La Xentral cada 30 min (~10–15 min). Cenar en el parque y de ahí directo al show.",c:"Acordado el 2 de noviembre: sale Xin-Gao del domingo. El Teppanyaki queda para el jueves 14."},
      {s:"noc",t:"Show México Espectacular",a:"show",at:"19:00",d:"Confirmar la hora del show con el hotel."}],
  11:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
      {s:"man",t:"Parque Xcaret: parque familiar",a:"xcaret"},
@@ -296,9 +296,9 @@ var REVIEW = [
  {h:"Prioridad del ajuste: atracciones antes que restaurantes",
   p:"Cuando algo no cabe, se mueve o se quita primero un restaurante y no un parque o un show.",
   fix:"Arriba Baja (solo mayores de 13) sale del plan y en su lugar va el Teatro del Río el lunes 11, al que pueden ir todos, niños incluidos."},
- {h:"Domingo 10 · Xin-Gao y el show quedan justos",
+ {h:"Domingo 10 · Cena antes del show",
   p:"El Teppanyaki de Xin-Gao abre a las 6:00 p. m. (a las 5:30 solo abre la experiencia Fusión). El show México Espectacular es a las 7:00 dentro del Parque Xcaret y el shuttle sale cada 30 minutos.",
-  fix:"Como propone Julián: reservar Xin-Gao en la experiencia Fusión a las 5:30 (el Teppanyaki abre a las 6), comer en una hora y salir a las 6:30 hacia La Xentral para tomar el shuttle al show. Confirmar con el hotel la hora del show y del shuttle. El Teppanyaki queda para el jueves 14."},
+  fix:"Acordado: sin Xin-Gao el domingo. Se cena en el buffet del Parque Xcaret y de ahí directo al show. Confirmar con el hotel la hora del show. El Teppanyaki queda para el jueves 14."},
  {h:"Martes 12 · Xoxi el mismo día que llegan cuatro habitaciones",
   p:"John y Carolina, Fabiola y Rosita, y Nelby y José Antonio llegan el 12. El hotel recomienda no reservar actividades con pick up el día de llegada, y si alguien no alcanza a llegar, el no-show cuesta US$25 por persona. Además, el regreso de Xoxi es hacia las 12:30 a. m.",
   fix:"Mantenerlo el martes (es el único día que encaja), pero que quienes llegan el 12 lo reserven solo si su vuelo aterriza en Cancún antes del mediodía."},
@@ -362,12 +362,12 @@ function dayHasIssue(plan,d){
 var S = {
   fam: store.get("fam",""),
   tab: store.get("tab","dia"),
-  plan: store.get("plan","jul"),
+  plan: store.get("plan2","adj"),
   day: store.get("day",10),
   open: {}
 };
 function P(){ return S.plan==="adj" ? ADJ : JUL; }
-function save(){ store.set("fam",S.fam); store.set("tab",S.tab); store.set("plan",S.plan); store.set("day",S.day); }
+function save(){ store.set("fam",S.fam); store.set("tab",S.tab); store.set("plan2",S.plan); store.set("day",S.day); }
 
 /* ============ Render ============ */
 var TABS=[["dia","Día a día"],["tabla","Tabla"],["notas","Notas al plan"],["reservas","Mis reservas"],["info","Actividades"]];
@@ -376,8 +376,8 @@ function renderTabs(){
     return '<button data-tab="'+t[0]+'" class="'+(S.tab===t[0]?"on":"")+'">'+t[1]+'</button>'; }).join("");
 }
 function planSeg(){
-  return '<div class="seg"><button data-plan="jul" class="'+(S.plan==="jul"?"on":"")+'">Plan de Julián</button>'+
-         '<button data-plan="adj" class="'+(S.plan==="adj"?"on":"")+'">Con ajustes sugeridos</button></div>';
+  return '<div class="seg"><button data-plan="adj" class="'+(S.plan==="adj"?"on":"")+'">Plan final</button>'+
+         '<button data-plan="jul" class="'+(S.plan==="jul"?"on":"")+'">Propuesta original de Julián</button></div>';
 }
 
 function itemHTML(x, d, i, f, rw){
@@ -485,7 +485,7 @@ function viewTabla(){
 }
 
 function viewNotas(){
-  var h = '<p class="lead">La base es la propuesta de Julián. Al cruzarla con el Formulario de Experiencias del hotel salen estos puntos. Los ajustes ya están aplicados en «Con ajustes sugeridos». Son sugerencias: el grupo opina y se ajusta con Julián.</p>';
+  var h = '<p class="lead">La base es la propuesta de Julián. Al cruzarla con el Formulario de Experiencias del hotel salen estos puntos. Los ajustes ya están aplicados en el «Plan final», acordado con Julián el 2 de noviembre.</p>';
   h += suggestBox("");
   h += '<div class="card"><b>Regla que se aplicó en todo el plan:</b> no hay planes de día completo ni salidas temprano al día siguiente de una noche con licor (Xoxi, Bar Xupes).</div>';
   REVIEW.forEach(function(r,i){
