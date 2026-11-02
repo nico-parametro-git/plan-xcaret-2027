@@ -443,16 +443,18 @@ function viewDia(){
     h += '</div></div>';
   });
   h += '</div>';
+  h += suggestBox(WFULL[o.w].toLowerCase()+" "+d+" de enero");
   if(!f) h += '<div class="note i">Elige tu familia arriba y te digo qué puede hacer cada niño y a qué hora salir de la habitación.</div>';
   return h;
 }
 
-function pendingCard(){
-  return '<div class="card"><div class="t" style="font-weight:700">Por decidir: ¿dónde va Xplor Fuego?</div>'+
-  '<p class="lead" style="margin:4px 0 6px">No cabe el jueves después del catamarán. Abre de lunes a sábado, 5:30 a 10:30 p. m., con buffet incluido. Es desde 5 años y la mayoría de las atracciones pide 1,10 m de estatura.</p>'+
-  '<div class="note c"><b>Opción A (sugerida): miércoles 13 en lugar del Teatro del Río.</b> Xenses a las 2 p. m. y Xplor Fuego desde las 6 p. m. con la cena. Está todo el grupo (también Pamela y Jean). El Teatro queda el sábado 16 (México y Olé) para quienes se quedan.</div>'+
-  '<div class="note i"><b>Opción B: sábado 16, solo para quienes se quedan</b>, en lugar del Teatro México y Olé. Las familias que salen el 16 no irían.</div>'+
-  '<div class="note i"><b>Opción C: dejarlo por fuera.</b> Quien quiera puede ir por su cuenta otra noche: no necesita reserva.</div></div>';
+/* Botón de sugerencias: abre WhatsApp con el mensaje medio escrito; la persona elige el grupo y lo envía */
+function suggestBox(about){
+  var f=famById(S.fam);
+  var txt = "💡 Sugerencia para el plan de Xcaret"+(about?" — "+about:"")+(f?" ("+f.t+")":"")+":\n";
+  return '<div class="card"><div style="font-weight:700">¿Algo no te cuadra o tienes una idea'+(about?' para este día':'')+'?</div>'+
+    '<p class="lead" style="margin:4px 0 8px">Se abre WhatsApp con el mensaje empezado. Escribe tu sugerencia y envíala al grupo del viaje.</p>'+
+    '<a class="btn" href="https://wa.me/?text='+encodeURIComponent(txt)+'" target="_blank" rel="noopener">💬 Sugerir un cambio</a></div>';
 }
 
 function viewTabla(){
@@ -483,7 +485,8 @@ function viewTabla(){
 }
 
 function viewNotas(){
-  var h = '<p class="lead">La base es la propuesta de Julián. Al cruzarla con el Formulario de Experiencias del hotel salen estos puntos. Los ajustes ya están aplicados en «Con ajustes sugeridos», para que Julián los apruebe o los cambie.</p>';
+  var h = '<p class="lead">La base es la propuesta de Julián. Al cruzarla con el Formulario de Experiencias del hotel salen estos puntos. Los ajustes ya están aplicados en «Con ajustes sugeridos». Son sugerencias: el grupo opina y se ajusta con Julián.</p>';
+  h += suggestBox("");
   h += '<div class="card"><b>Regla que se aplicó en todo el plan:</b> no hay planes de día completo ni salidas temprano al día siguiente de una noche con licor (Xoxi, Bar Xupes).</div>';
   REVIEW.forEach(function(r,i){
     h += '<div class="card rv"><div class="n">'+(i+1)+'</div><div><div class="h">'+esc(r.h)+'</div><p>'+esc(r.p)+'</p><div class="fix"><b>Sugerencia:</b> '+esc(r.fix)+'</div></div></div>';
