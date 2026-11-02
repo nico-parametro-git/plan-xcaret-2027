@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Plan Xcaret · Enero 2027</title>
+<meta property="og:title" content="Plan del grupo · Hotel Xcaret México · 10–17 ene 2027">
+<meta property="og:description" content="El plan de Julián día a día, con horarios, traslados y qué puede hacer cada niño.">
+<meta name="theme-color" content="#111113">
+<style>
+:root{
+  --bg:#F4F4F5; --card:#FFFFFF; --ink:#151517; --muted:#5F5E66; --line:#DEDDE2; --sunk:#ECECEF;
+  --fx:#C2186D; --fx-soft:#FBE3EF; --dark:#111113;
+  --ok:#1E7046; --ok-bg:#DDF0E4; --warn:#8A5300; --warn-bg:#FBEFD2; --bad:#A3271C; --bad-bg:#F8DEDA;
+  --info:#2D4F8A; --info-bg:#E2EAF7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--fx)}
+button,select,input{font:inherit;color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header{background:var(--dark);color:#F2F2F4;padding:18px 0 14px}
+header .eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#FF7AB8;font-weight:700}
+header h1{margin:4px 0 2px;font-size:1.45rem;line-height:1.2;font-weight:700}
+header p{margin:0;color:#B9B8C0;font-size:.88rem}
+.who{background:var(--dark);padding:0 0 14px}
+.who label{display:block;color:#B9B8C0;font-size:.8rem;margin-bottom:4px}
+.who select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #3A3A40;background:#1E1E22;color:#fff;font-weight:600}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav button{flex:0 0 auto;border:0;background:none;padding:12px 12px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer}
+nav button.on{color:var(--fx);border-bottom-color:var(--fx)}
+main{padding:16px 0 60px}
+.seg{display:flex;background:var(--sunk);border-radius:10px;padding:3px;gap:3px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:none;padding:8px 6px;border-radius:8px;font-weight:600;font-size:.86rem;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px;scrollbar-width:none}
+.days button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 10px;text-align:center;cursor:pointer;min-width:58px}
+.days button b{display:block;font-size:1.05rem}
+.days button span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.days button.on{background:var(--fx);border-color:var(--fx);color:#fff}
+.days button.on span{color:#FFE1EF}
+.days button i{display:block;width:6px;height:6px;border-radius:50%;margin:3px auto 0;background:transparent}
+.days button i.w{background:#E0A100}
+.days button.on i.w{background:#FFE08A}
+.daytitle{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.daytitle h2{margin:0;font-size:1.3rem}
+.pres{font-size:.82rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.slot{display:grid;grid-template-columns:78px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.slot:first-child{border-top:0;padding-top:2px}
+.slot .sl{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding-top:2px}
+.slot .sl .tm{display:block;font-size:.9rem;letter-spacing:0;text-transform:none;color:var(--ink);font-variant-numeric:tabular-nums}
+.it{margin-bottom:6px}
+.it:last-child{margin-bottom:0}
+.it .t{font-weight:700}
+.it .d{color:var(--muted);font-size:.88rem}
+.it.cont .t{font-weight:600;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.tag{font-size:.74rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.tag.fx{background:var(--fx-soft);color:var(--fx)}
+.tag.ok{background:var(--ok-bg);color:var(--ok)}
+.tag.no{background:var(--bad-bg);color:var(--bad)}
+.tag.q{background:var(--warn-bg);color:var(--warn)}
+.note{font-size:.84rem;border-radius:8px;padding:7px 10px;margin-top:6px;line-height:1.4}
+.note.w{background:var(--warn-bg);color:#5C3A00}
+.note.b{background:var(--bad-bg);color:#6E1A12}
+.note.i{background:var(--info-bg);color:#1E3560}
+.note.c{background:var(--fx-soft);color:#6E0D3E}
+.note b{font-weight:700}
+.more{border:0;background:none;color:var(--fx);font-weight:600;font-size:.84rem;padding:4px 0 0;cursor:pointer}
+.det{font-size:.85rem;color:var(--muted);margin-top:4px;border-left:3px solid var(--line);padding-left:10px}
+.det div{margin:2px 0}
+.leave{font-size:.84rem;font-weight:600;color:var(--ink);margin-top:4px}
+.leave::before{content:"⏰ "}
+.empty{color:var(--muted);font-style:italic}
+h3{font-size:1.05rem;margin:18px 0 8px}
+.lead{color:var(--muted);font-size:.9rem;margin:0 0 12px}
+.rv{display:grid;grid-template-columns:28px 1fr;gap:8px}
+.rv .n{width:24px;height:24px;border-radius:50%;background:var(--fx);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.rv .h{font-weight:700}
+.rv p{margin:3px 0;font-size:.9rem}
+.rv .fix{font-size:.88rem;background:var(--ok-bg);color:#11402A;border-radius:8px;padding:6px 10px;margin-top:6px}
+.tblw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{border-collapse:collapse;font-size:.8rem;min-width:900px}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+th{background:var(--sunk);font-weight:700;position:sticky;top:0}
+td.rowh{font-weight:700;background:var(--sunk);white-space:nowrap}
+td.alc{background:#FFF3D6}
+td.out{background:#F0F0F2;color:#9A99A0}
+.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:.78rem;color:var(--muted);margin:8px 0}
+.kid{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.kid:first-child{border-top:0}
+.kid input{width:76px;padding:6px 8px;border:1px solid var(--line);border-radius:8px}
+.res{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.res:first-child{border-top:0}
+.res select{padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--fx);color:#fff;text-decoration:none;margin:4px 6px 4px 0}
+.btn.sec{background:var(--sunk);color:var(--ink)}
+textarea{width:100%;min-height:180px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;font-size:.85rem}
+.act{margin-bottom:10px}
+.act .t{font-weight:700;font-size:1rem}
+.foot{font-size:.78rem;color:var(--muted);margin-top:24px}
+@media (min-width:720px){ header h1{font-size:1.8rem} .slot{grid-template-columns:110px 1fr} }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">Hotel Xcaret México · 10–17 enero 2027</div>
+  <h1>Plan del grupo</h1>
+  <p>Propuesta de Julián, día a día, con horarios del hotel, traslados y qué puede hacer cada niño.</p>
+</div></header>
+<div class="who"><div class="wrap">
+  <label for="fam">¿Quién eres? (así te muestro tu plan)</label>
+  <select id="fam"></select>
+</div></div>
+<nav><div class="wrap" id="tabs"></div></nav>
+<main><div class="wrap" id="view"></div></main>
+
+<script>
+"use strict";
+/* ============ Almacenamiento local (solo en el celular de cada quien) ============ */
+var store = {
+  get: function(k, d){ try{ var v = localStorage.getItem("xc27_"+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set: function(k, v){ try{ localStorage.setItem("xc27_"+k, JSON.stringify(v)); }catch(e){} }
+};
+
+/* ============ Grupo ============ */
+var FAMS = [
+  {id:"julian",  t:"Julián y Luisa",       kids:[7,4],  inD:10, outD:17},
+  {id:"john",    t:"John y Carolina",      kids:[null], inD:12, outD:17},
+  {id:"fabiola", t:"Fabiola y Rosita",     kids:[],     inD:12, outD:17},
+  {id:"nelby",   t:"Nelby y José Antonio", kids:[],     inD:12, outD:17},
+  {id:"felipe",  t:"Felipe y Laura",       kids:[11],   inD:10, outD:16},
+  {id:"nico",    t:"Nico y Diana",         kids:[],     inD:10, outD:16},
+  {id:"rogelio", t:"Rogelio y Juliana",    kids:[8,11], inD:10, outD:16},
+  {id:"david",   t:"David y Sofía",        kids:[11,7], inD:10, outD:16},
+  {id:"hugo",    t:"Hugo y Diana",         kids:[15],   inD:10, outD:16},
+  {id:"pamela",  t:"Pamela y Jean",        kids:[7,2],  inD:10, outD:15}
+];
+function famById(id){ for(var i=0;i<FAMS.length;i++) if(FAMS[i].id===id) return FAMS[i]; return null; }
+function kidsOf(f){ // edades/estaturas que cada familia ajusta en su celular
+  var over = store.get("kids_"+f.id, {});
+  return f.kids.map(function(a,i){
+    var o = over[i] || {};
+    return {age: (o.age!==undefined && o.age!=="" && o.age!==null) ? Number(o.age) : a, h: o.h ? Number(o.h) : null, i:i};
+  });
+}
+function hasSmall(f){ return kidsOf(f).some(function(k){ return k.age!==null && k.age<5; }); }
+
+var DAYS = [
+  {d:10,w:"Dom"},{d:11,w:"Lun"},{d:12,w:"Mar"},{d:13,w:"Mié"},{d:14,w:"Jue"},{d:15,w:"Vie"},{d:16,w:"Sáb"},{d:17,w:"Dom"}
+];
+var WFULL = {Dom:"Domingo",Lun:"Lunes",Mar:"Martes","Mié":"Miércoles",Jue:"Jueves",Vie:"Viernes","Sáb":"Sábado"};
+var SLOTS = [["des","Desayuno"],["man","Mañana"],["alm","Almuerzo"],["tar","Tarde"],["cen","Cena"],["noc","Noche"],["mad","Madrugada"]];
+
+/* ============ Actividades (datos del Formulario de Experiencias del hotel) ============ */
+var ACT = {
+  xcaret:{n:"Parque Xcaret", res:false, where:"Shuttle «La Despeinada» desde La Xentral cada 30 min · ~10–15 min de trayecto",
+    hours:"Lun–Dom 8:30–22:30. Incluye una comida en los buffets del parque.", kids:"Todas las edades.", walk:true},
+  show:{n:"Show Xcaret México Espectacular", res:false, where:"Dentro del Parque Xcaret (Gran Tlachco) · shuttle cada 30 min",
+    hours:"Hora de enero por confirmar con el hotel (habitualmente 7:00 p. m., ~2 h).", kids:"Todas las edades. Termina tarde para los más pequeños."},
+  arribabaja:{n:"Arriba Baja", res:true, minAge:13, where:"Restaurante dentro del hotel · a pie",
+    hours:"Cena 18:00–21:00 · Código de vestimenta FORMAL.", kids:"Solo adultos y mayores de 13 años.",
+    alt:"Para los menores de 13: Club infantil del hotel (Club Xiquillos, 4 a 12 años; confirmar con el hotel si abre en la noche) o servicio de niñera para menores de 4."},
+  xupes:{n:"Bar Xupes", res:false, adults:true, alc:true, where:"Dentro del hotel", hours:"Noche.", kids:"Solo adultos."},
+  xoxi:{n:"Xoximilco", res:true, alc:true, where:"Bus desde el hotel · ~1 h (queda cerca del aeropuerto de Cancún)",
+    hours:"Lun–Sáb · Pick up 18:05 · Regreso al hotel ~00:30 · Cena y bebidas incluidas (trajineras con mariachi y tequila).",
+    kids:"Familiar; para menores de 5 confirmar con el hotel. Regreso a las 00:30: los pequeños llegan dormidos."},
+  xenses:{n:"Xenses", res:true, where:"Shuttle desde La Xentral · ~10 min",
+    hours:"Lun–Sáb 9:00–19:00 · Pick up 9:00 o 14:00 · Alimentos NO incluidos.", kids:"Familiar."},
+  teatro:{n:"Teatro del Río (cena show)", res:true, where:"Dentro del hotel · a pie",
+    hours:"Única función 19:00 (2 h). Lun/Mié/Vie: Corazón de Madera · Mar/Jue/Sáb: México y Olé · Casual. No-show: MXN 600 por persona.",
+    kids:"Familiar."},
+  catamaran:{n:"Catamarán Isla Mujeres", res:true, early:true, where:"Bus al muelle de Cancún · ~1 h 15 min",
+    hours:"Mar/Jue/Vie/Sáb/Dom · Pick up 9:30 · Sale de la isla 18:00, bus a hoteles 18:30 → llegan al hotel ~20:00 · Costo adicional (confirmar con Guest Services).",
+    kids:"Todas las edades (niños de 5 a 11 pagan tarifa niño). Snorkel: desde 8 años y saber nadar. NO apto para embarazadas ni personas con restricción de movilidad."},
+  xplorfuego:{n:"Xplor Fuego", res:false, minAge:5, minH:110, where:"Shuttle desde La Xentral solo entre 17:30 y 21:00 · ~15 min",
+    hours:"Lun–Sáb 17:30–22:30 · Buffet incluido.", kids:"Desde 5 años. La mayoría de atracciones piden 1,10 m de estatura (balsas y nado: 1,00 m).",
+    alt:"Los menores de 5 no entran: se quedan con un adulto en el hotel o con niñera."},
+  xelha:{n:"Xel-Há + Tulum", res:true, early:true, where:"Bus · ~45 min a Xel-Há y ~20 min más a Tulum",
+    hours:"Lun–Dom · Pick up 7:15 · Regreso ~18:30 · Alimentos y bebidas incluidos · Cuota US$26 por persona.", kids:"Todas las edades (en Tulum se camina bastante al sol: llevar coche o portabebé)."},
+  xenotes:{n:"Xenotes", res:true, early:true, minAge:6, where:"Bus · ruta por 4 cenotes",
+    hours:"Lun–Sáb · Pick up 8:50 · Regreso ~17:30 · Alimentos y bebidas incluidos.", kids:"Edad mínima 6 años (obligatoria). NO apto para embarazadas ni personas con restricción de movilidad.",
+    alt:"Los menores de 6 no pueden ir."},
+  xingao:{n:"Xin-Gao", res:true, where:"Restaurante dentro del hotel · a pie",
+    hours:"Fusión 17:30–21:30 · Teppanyaki 18:00–22:00 · Casual.", kids:"Familiar."},
+  buffet:{n:"Buffet", res:false, where:"Dentro del hotel · a pie",
+    hours:"La Xentral y El Mercado: continental 6:30–7:00, buffet 7:00–12:00, comida 13:00–17:00, cena 18:00–23:00.", kids:"Familiar."}
+};
+
+/* ============ Plan de Julián (tal cual su tabla) ============ */
+// s=franja, t=título, d=detalle, a=actividad, at=hora, pk=es pick up, alc=hay licor, cont=continuación, r=nota de revisión [nivel, texto]
+var JUL = {
+ 10:[{s:"des",t:"Llegada"},
+     {s:"man",t:"Llegada e instalación"},
+     {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"tar",t:"Hotel: disfrute y piscina niños"},
+     {s:"cen",t:"Xin-Gao: Teppanyaki",a:"xingao",at:"17:30",r:["w","El Teppanyaki abre a las 6:00 p. m. (a las 5:30 solo abre la experiencia Fusión). Y el show es a las 7:00 en el Parque Xcaret, con shuttle cada 30 min: no alcanza."]},
+     {s:"noc",t:"Xcaret: Show México Espectacular",a:"show",at:"19:00",d:"7:00 a 9:00 p. m."}],
+ 11:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
+     {s:"man",t:"Parque Xcaret: parque familiar",a:"xcaret"},
+     {s:"alm",t:"Buffet: Parque Xcaret"},
+     {s:"tar",t:"Parque Xcaret: parque familiar",a:"xcaret",cont:true},
+     {s:"cen",t:"Arriba Baja — alta cocina, solo adultos y mayores de 13",a:"arribabaja",at:"20:00"},
+     {s:"noc",t:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true}],
+ 12:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
+     {s:"man",t:"Hotel: piscina y niños"},
+     {s:"alm",t:"Buffet: El Mercado",a:"buffet"},
+     {s:"tar",t:"Hotel: reunión de las familias en piscina"},
+     {s:"cen",t:"Xoxi (trajineras, cena incluida) — salida 6 p. m.",a:"xoxi",at:"18:05",pk:true,alc:true,r:["i","Según el formulario del hotel el pick up es a las 6:05 p. m. y el regreso es ~12:30 a. m. (no a las 12)."]},
+     {s:"noc",t:"Xoxi — retorno 12 a. m.",a:"xoxi",cont:true,alc:true}],
+ 13:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
+     {s:"man",t:"Xenses: ciudad al revés y spa, 9 a. m.–1 p. m.",a:"xenses",at:"09:00",pk:true},
+     {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"tar",t:"Hotel: piscinas, disfrutar el hotel"},
+     {s:"cen",t:"Teatro del Río — Corazón de Madera",a:"teatro",at:"19:00",d:"7 a 9 p. m."},
+     {s:"noc",t:"Bar Las Maquinitas — niños y adultos"}],
+ 14:[{s:"des",t:"Buffet",at:"07:30",a:"buffet"},
+     {s:"man",t:"Catamarán: club de playa e Isla Mujeres — salida 8:30",a:"catamaran",at:"08:30",pk:true,r:["w","Según el formulario el pick up es a las 9:30 y el bus sale de Cancún a las 6:30 p. m.: llegan al hotel hacia las 8:00 p. m., no a las 6."]},
+     {s:"alm",t:"Buffet: Isla Mujeres"},
+     {s:"tar",t:"Catamarán — retorno 6 p. m.",a:"catamaran",cont:true},
+     {s:"cen",t:"Xplor Fuego: buffet incluido, 7:30 p. m. (mayores de 5)",a:"xplorfuego",at:"19:30",r:["b","No da el tiempo: se vuelve del catamarán hacia las 8:00 p. m. y el shuttle a Xplor Fuego opera solo hasta las 9:00 p. m. (el parque cierra 10:30)."]},
+     {s:"noc",t:"Xplor Fuego — retorno 10:30 p. m.",a:"xplorfuego",cont:true},
+     {s:"mad",t:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true}],
+ 15:[{s:"des",t:"Buffet (continental)",at:"06:30",a:"buffet"},
+     {s:"man",t:"Xel-Há + Tulum — salida 7:00 a. m.",a:"xelha",at:"07:15",pk:true,r:["i","Pick up 7:15 según el formulario. Cuota de US$26 por persona."]},
+     {s:"alm",t:"Buffet: Xel-Há"},
+     {s:"tar",t:"Xel-Há + Tulum — retorno 6:30 p. m.",a:"xelha",cont:true},
+     {s:"cen",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"noc",t:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true}],
+ 16:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
+     {s:"man",t:"Mañana libre o Xenotes",a:"xenotes",at:"08:50",pk:true,d:"Julián: «salen cuatro familias»."},
+     {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"tar",t:"Disfrutar el hotel y preparar salidas"},
+     {s:"cen",t:"Teatro del Río — México y Olé",a:"teatro",at:"19:00",d:"7 a 9 p. m."}],
+ 17:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
+     {s:"man",t:"Mañana libre"},
+     {s:"alm",t:"Buffet: El Mercado",a:"buffet"},
+     {s:"tar",t:"Salida de las familias restantes"}]
+};
+
+/* ============ Plan con ajustes sugeridos (mismos planes de Julián, reacomodados) ============ */
+// c = por qué cambió
+var ADJ = {
+ 10:[{s:"des",t:"Llegada"},
+     {s:"man",t:"Llegada e instalación",d:"Se puede usar todo el hotel desde las 7:00 a. m. del día de llegada."},
+     {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"tar",t:"Hotel: piscina niños"},
+     {s:"cen",t:"Parque Xcaret: entrar en la tarde y cenar en el parque (buffet incluido)",a:"xcaret",at:"17:00",c:"Xin-Gao pasa al viernes 15: el Teppanyaki abre a las 6 p. m. y no alcanzaba con el show de las 7."},
+     {s:"noc",t:"Show México Espectacular",a:"show",at:"19:00",d:"Confirmar la hora del show con el hotel."}],
+ 11:JUL[11],
+ 12:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
+     {s:"man",t:"Hotel: piscina y niños"},
+     {s:"alm",t:"Buffet: El Mercado",a:"buffet"},
+     {s:"tar",t:"Hotel: reunión de las familias en piscina",d:"Llegan John, Fabiola, Rosita, Nelby y José Antonio."},
+     {s:"cen",t:"Xoximilco — trajineras con cena incluida",a:"xoxi",at:"18:05",pk:true,alc:true},
+     {s:"noc",t:"Xoximilco — regreso al hotel ~12:30 a. m.",a:"xoxi",cont:true,alc:true}],
+ 13:[{s:"des",t:"Buffet sin afán (abre hasta las 12)",a:"buffet"},
+     {s:"man",t:"Mañana libre: descanso después de Xoxi",c:"Xenses pasa a la tarde: después de volver de Xoxi a las 12:30 a. m., salir a las 9 a. m. es muy pesado."},
+     {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"tar",t:"Xenses: ciudad al revés",a:"xenses",at:"14:00",pk:true,d:"Volver al hotel hacia las 5:30 p. m. para alistarse para el Teatro.",c:"Antes era a las 9 a. m.; el hotel también tiene pick up a las 2 p. m."},
+     {s:"cen",t:"Teatro del Río — Corazón de Madera",a:"teatro",at:"19:00"},
+     {s:"noc",t:"Bar Las Maquinitas — niños y adultos"}],
+ 14:[{s:"des",t:"Buffet",at:"08:00",a:"buffet",c:"Con pick up a las 9:30 basta desayunar a las 8."},
+     {s:"man",t:"Catamarán: club de playa e Isla Mujeres",a:"catamaran",at:"09:30",pk:true},
+     {s:"alm",t:"En Isla Mujeres"},
+     {s:"tar",t:"Catamarán — llegada al hotel ~8:00 p. m.",a:"catamaran",cont:true},
+     {s:"cen",t:"Buffet: El Mercado o La Xentral (abren hasta las 11 p. m.)",a:"buffet",c:"Xplor Fuego no cabe este día (ver «Por decidir»)."},
+     {s:"noc",t:"Noche tranquila: mañana el pick up es a las 7:15",c:"Se quita el Bar Xupes de esta noche porque al otro día se madruga a Xel-Há."}],
+ 15:[{s:"des",t:"Desayuno continental",at:"06:30",a:"buffet",d:"El Mercado o La Xentral, 6:30–7:00."},
+     {s:"man",t:"Xel-Há + Tulum",a:"xelha",at:"07:15",pk:true},
+     {s:"alm",t:"Buffet: Xel-Há"},
+     {s:"tar",t:"Xel-Há + Tulum — regreso ~6:30 p. m.",a:"xelha",cont:true},
+     {s:"cen",t:"Xin-Gao Teppanyaki — despedida de quienes salen el 16",a:"xingao",at:"19:30",c:"Viene del domingo 10."},
+     {s:"noc",t:"Noche tranquila: al otro día hay vuelos y Xenotes",c:"El Bar Xupes pasa al sábado, cuando el domingo no hay madrugada."}],
+ 16:[{s:"des",t:"Buffet",at:"07:30",a:"buffet"},
+     {s:"man",t:"Xenotes (quienes se quedan)",a:"xenotes",at:"08:50",pk:true,d:"O mañana libre."},
+     {s:"man",t:"Salen al aeropuerto: Felipe y Laura, Nico y Diana, Rogelio y Juliana, David y Sofía, Hugo y Diana",d:"El traslado se pide con 24 h de anticipación y sale ~4 h antes del vuelo."},
+     {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
+     {s:"tar",t:"Disfrutar el hotel"},
+     {s:"cen",t:"Teatro del Río — México y Olé",a:"teatro",at:"19:00"},
+     {s:"noc",t:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true,c:"Viene del jueves y viernes: aquí sí, porque el domingo es mañana libre."}],
+ 17:JUL[17]
+};
+
+/* ============ Revisión (lo que se le sugiere a Julián) ============ */
+var REVIEW = [
+ {h:"Domingo 10 · Xin-Gao y el show no alcanzan",
+  p:"El Teppanyaki de Xin-Gao abre a las 6:00 p. m. (a las 5:30 solo abre la experiencia Fusión). El show México Espectacular es a las 7:00 dentro del Parque Xcaret y el shuttle sale cada 30 minutos.",
+  fix:"Entrar al Parque Xcaret en la tarde, cenar en el parque (el buffet está incluido) y ver el show. Xin-Gao pasa al viernes 15 como cena de despedida."},
+ {h:"Martes 12 · Xoxi el mismo día que llegan cuatro habitaciones",
+  p:"John y Carolina, Fabiola y Rosita, y Nelby y José Antonio llegan el 12. El hotel recomienda no reservar actividades con pick up el día de llegada, y si alguien no alcanza a llegar, el no-show cuesta US$25 por persona. Además, el regreso de Xoxi es hacia las 12:30 a. m.",
+  fix:"Mantenerlo el martes (es el único día que encaja), pero que quienes llegan el 12 lo reserven solo si su vuelo aterriza en Cancún antes del mediodía."},
+ {h:"Miércoles 13 · Xenses a las 9 a. m. después de Xoxi",
+  p:"Volver de Xoxi a las 12:30 a. m., con licor de por medio, y salir a las 9 a. m. es pesado, sobre todo para quienes tienen niños.",
+  fix:"Usar el pick up de las 2:00 p. m. a Xenses (el hotel ofrece 9:00 y 14:00). La mañana queda libre para descansar."},
+ {h:"Jueves 14 · El catamarán vuelve tarde y Xplor Fuego no cabe",
+  p:"Según el formulario, el pick up del catamarán es a las 9:30 (no 8:30) y el bus sale de Cancún a las 6:30 p. m.: llegan al hotel hacia las 8:00 p. m. El shuttle a Xplor Fuego solo opera hasta las 9:00 p. m.",
+  fix:"Ese día solo catamarán y cena en el hotel. Xplor Fuego se reubica (ver «Por decidir»)."},
+ {h:"Jueves 14 y viernes 15 · Bar en la madrugada antes de madrugar",
+  p:"El Bar Xupes del jueves en la madrugada choca con el pick up a Xel-Há de las 7:15 del viernes. Y el Xupes del viernes choca con Xenotes (8:50) y con los vuelos del sábado de cinco habitaciones.",
+  fix:"Jueves y viernes, noches tranquilas. El Bar Xupes queda el lunes 11 y el sábado 16 (el domingo no se madruga)."},
+ {h:"Sábado 16 · Quién sale y Xenotes",
+  p:"El 15 sale Pamela y Jean. El 16 salen cinco habitaciones: Felipe y Laura, Nico y Diana, Rogelio y Juliana, David y Sofía, Hugo y Diana. El 17 salen Julián y Luisa, John y Carolina, Fabiola y Rosita, y Nelby y José Antonio. Xenotes vuelve a las 5:30 p. m., así que es solo para quienes se quedan, y exige 6 años cumplidos (Christopher, con 4, no puede ir).",
+  fix:"Xenotes el sábado solo para quienes se quedan hasta el 17."}
+];
+
+/* ============ Utilidades ============ */
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function hm(t){ if(!t) return ""; var p=t.split(":"), h=+p[0], m=+p[1]; var ap = h<12 ? "a. m." : "p. m."; var hh=((h+11)%12)+1; return hh+":"+(m<10?"0":"")+m+" "+ap; }
+function minus(t,mins){ var p=t.split(":"); var x=(+p[0])*60+(+p[1])-mins; if(x<0) x+=1440; var h=Math.floor(x/60), m=x%60; return (h<10?"0":"")+h+":"+(m<10?"0":"")+m; }
+function dayObj(d){ for(var i=0;i<DAYS.length;i++) if(DAYS[i].d===d) return DAYS[i]; }
+function presence(f,d){
+  if(d<f.inD) return {k:"no", l:"Aún no llegan (llegan el "+f.inD+")"};
+  if(d>f.outD) return {k:"no", l:"Ya regresaron a casa"};
+  if(d===f.inD) return {k:"in", l:"Hoy llegan"};
+  if(d===f.outD) return {k:"out", l:"Hoy salen al aeropuerto"};
+  return {k:"si", l:""};
+}
+function kidVerdict(a, k){
+  if(!a) return null;
+  if(a.adults) return {v:"no", why:"solo adultos"};
+  if(k.age===null) return {v:"q", why:"edad por confirmar"};
+  if(a.minAge && k.age<a.minAge) return {v:"no", why:"mín. "+a.minAge+" años"};
+  if(a.minH){
+    if(k.h===null) return k.age<12 ? {v:"q", why:"medir: piden "+(a.minH/100).toFixed(2).replace(".",",")+" m"} : {v:"si", why:""};
+    if(k.h<a.minH) return {v:"q", why:"mide "+k.h+" cm: no entra a todo"};
+  }
+  return {v:"si", why:""};
+}
+function walkMins(f){ return hasSmall(f) ? 25 : 15; }
+
+/* Regla del grupo: nada de madrugar o de día completo después de una noche con licor */
+function nightAlc(plan,d){ var it=plan[d]||[]; for(var i=0;i<it.length;i++){ var x=it[i]; if(x.alc && (x.s==="cen"||x.s==="noc"||x.s==="mad")) return x; } return null; }
+function isEarly(x){ if(!x.a||x.cont) return false; var a=ACT[x.a]; if(a.early) return true; return !!(x.pk && x.at && x.at<"10:00"); }
+function ruleWarnings(plan){
+  var out={}; // key "d|idx" -> texto
+  for(var j=1;j<DAYS.length;j++){
+    var d=DAYS[j].d, prev=nightAlc(plan,d-1); if(!prev) continue;
+    (plan[d]||[]).forEach(function(x,i){ if(isEarly(x)) out[d+"|"+i] = "La noche anterior hay "+ (ACT[prev.a]?ACT[prev.a].n:prev.t) +" (con licor) y este plan sale a las "+hm(x.at); });
+  }
+  return out;
+}
+function dayHasIssue(plan,d){
+  var rw=ruleWarnings(plan), it=plan[d]||[];
+  for(var i=0;i<it.length;i++){ if(rw[d+"|"+i]) return true; if(plan===JUL && it[i].r && it[i].r[0]!=="i") return true; }
+  return false;
+}
+
+/* ============ Estado ============ */
+var S = {
+  fam: store.get("fam",""),
+  tab: store.get("tab","dia"),
+  plan: store.get("plan","jul"),
+  day: store.get("day",10),
+  open: {}
+};
+function P(){ return S.plan==="adj" ? ADJ : JUL; }
+function save(){ store.set("fam",S.fam); store.set("tab",S.tab); store.set("plan",S.plan); store.set("day",S.day); }
+
+/* ============ Render ============ */
+var TABS=[["dia","Día a día"],["tabla","Tabla"],["notas","Notas al plan"],["reservas","Mis reservas"],["info","Actividades"]];
+function renderTabs(){
+  document.getElementById("tabs").innerHTML = TABS.map(function(t){
+    return '<button data-tab="'+t[0]+'" class="'+(S.tab===t[0]?"on":"")+'">'+t[1]+'</button>'; }).join("");
+}
+function planSeg(){
+  return '<div class="seg"><button data-plan="jul" class="'+(S.plan==="jul"?"on":"")+'">Plan de Julián</button>'+
+         '<button data-plan="adj" class="'+(S.plan==="adj"?"on":"")+'">Con ajustes sugeridos</button></div>';
+}
+
+function itemHTML(x, d, i, f, rw){
+  var a = x.a ? ACT[x.a] : null, h = '<div class="it'+(x.cont?" cont":"")+'">';
+  h += '<div class="t">'+esc(x.t)+'</div>';
+  if(x.d) h += '<div class="d">'+esc(x.d)+'</div>';
+  var tags=[];
+  if(a && !x.cont){
+    if(a.res) tags.push('<span class="tag fx">Requiere reserva</span>');
+    if(x.pk) tags.push('<span class="tag">Pick up '+hm(x.at)+'</span>');
+  }
+  if(x.alc && !x.cont) tags.push('<span class="tag q">Con licor</span>');
+  // niños de la familia elegida
+  if(f && a && !x.cont && (a.minAge||a.minH)){
+    kidsOf(f).forEach(function(k){
+      var v=kidVerdict(a,k); if(!v) return;
+      var lab = (k.age===null?"Niño/a":"Niño/a de "+k.age)+": ";
+      tags.push('<span class="tag '+(v.v==="si"?"ok":v.v==="no"?"no":"q")+'">'+lab+(v.v==="si"?"puede ✓":v.v==="no"?"no puede ("+v.why+")":v.why)+'</span>');
+    });
+  }
+  if(tags.length) h += '<div class="tags">'+tags.join("")+'</div>';
+  // hora de salir de la habitación
+  if(f && x.at && !x.cont && a && presence(f,d).k!=="no"){
+    var w=walkMins(f);
+    if(x.pk) h += '<div class="leave">Salgan de la habitación a las '+hm(minus(x.at,15+w))+' (pick up '+hm(x.at)+', hay que estar 15 min antes'+(hasSmall(f)?'; con niños pequeños calculé 25 min a pie':'')+')</div>';
+    else if(a.res) h += '<div class="leave">Salgan de la habitación a las '+hm(minus(x.at,w))+' ('+w+' min a pie dentro del hotel)</div>';
+  }
+  if(f && a && a.alt && !x.cont){
+    var anyNo = kidsOf(f).some(function(k){ var v=kidVerdict(a,k); return v && v.v==="no"; });
+    if(anyNo) h += '<div class="note i"><b>Para los niños:</b> '+esc(a.alt)+'</div>';
+  }
+  if(rw[d+"|"+i]) h += '<div class="note b"><b>Ojo:</b> '+esc(rw[d+"|"+i])+'</div>';
+  if(S.plan==="jul" && x.r) h += '<div class="note '+(x.r[0]==="b"?"b":x.r[0]==="w"?"w":"i")+'">'+esc(x.r[1])+'</div>';
+  if(S.plan==="adj" && x.c) h += '<div class="note c"><b>Cambio:</b> '+esc(x.c)+'</div>';
+  if(a && !x.cont){
+    var key=d+"|"+i;
+    h += '<button class="more" data-more="'+key+'">'+(S.open[key]?"Ocultar detalles":"Horarios, traslado y edades")+'</button>';
+    if(S.open[key]) h += '<div class="det"><div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div>'+(a.res?'<div><b>Reserva:</b> con Guest Services (formulario del hotel). Cancelar con menos de 24 h: US$25 por persona.</div>':'<div><b>Reserva:</b> no necesita.</div>')+'</div>';
+  }
+  return h+'</div>';
+}
+
+function viewDia(){
+  var plan=P(), f=famById(S.fam), d=S.day, rw=ruleWarnings(plan);
+  var h = planSeg();
+  h += '<div class="days">'+DAYS.map(function(o){
+    return '<button data-day="'+o.d+'" class="'+(o.d===d?"on":"")+'"><span>'+o.w+'</span><b>'+o.d+'</b><i class="'+(dayHasIssue(plan,o.d)?"w":"")+'"></i></button>'; }).join("")+'</div>';
+  var o=dayObj(d), pr = f ? presence(f,d) : null;
+  h += '<div class="daytitle"><h2>'+WFULL[o.w]+' '+d+' de enero</h2>'+(pr&&pr.l?'<span class="pres"><b>'+esc(f.t)+':</b> '+esc(pr.l)+'</span>':'')+'</div>';
+  if(f && pr.k==="no"){ h += '<div class="note i">'+esc(f.t)+': '+esc(pr.l)+'. Igual te muestro lo que hace el resto del grupo.</div>'; }
+  if(f && pr.k==="out"){ h += '<div class="note i">Día de salida: el traslado al aeropuerto se pide con 24 h de anticipación y sale ~4 h antes del vuelo. Pueden usar el hotel hasta las 6:00 p. m.</div>'; }
+  if(f && pr.k==="in"){
+    var it=(plan[d]||[]).filter(function(x){return x.pk && !x.cont;});
+    if(it.length) h += '<div class="note w">Hoy llegan: el hotel recomienda no reservar actividades con pick up el día de llegada (si no alcanzan, el no-show cuesta US$25 por persona). Resérvenlo solo si su vuelo llega temprano.</div>';
+  }
+  h += '<div class="card">';
+  SLOTS.forEach(function(sl){
+    var items=[]; (plan[d]||[]).forEach(function(x,i){ if(x.s===sl[0]) items.push([x,i]); });
+    if(!items.length) return;
+    var tm = items[0][0].at && !items[0][0].cont ? hm(items[0][0].at) : "";
+    h += '<div class="slot"><div class="sl">'+sl[1]+(tm?'<span class="tm">'+tm+'</span>':'')+'</div><div>';
+    items.forEach(function(p){ h += itemHTML(p[0], d, p[1], f, rw); });
+    h += '</div></div>';
+  });
+  h += '</div>';
+  if(S.plan==="adj" && d===14) h += pendingCard();
+  if(!f) h += '<div class="note i">Elige tu familia arriba y te digo qué puede hacer cada niño y a qué hora salir de la habitación.</div>';
+  return h;
+}
+
+function pendingCard(){
+  return '<div class="card"><div class="t" style="font-weight:700">Por decidir: ¿dónde va Xplor Fuego?</div>'+
+  '<p class="lead" style="margin:4px 0 6px">No cabe el jueves después del catamarán. Abre de lunes a sábado, 5:30 a 10:30 p. m., con buffet incluido. Es desde 5 años y la mayoría de las atracciones pide 1,10 m de estatura.</p>'+
+  '<div class="note c"><b>Opción A (sugerida): miércoles 13 en lugar del Teatro del Río.</b> Xenses a las 2 p. m. y Xplor Fuego desde las 6 p. m. con la cena. Está todo el grupo (también Pamela y Jean). El Teatro queda el sábado 16 (México y Olé) para quienes se quedan.</div>'+
+  '<div class="note i"><b>Opción B: sábado 16, solo para quienes se quedan</b>, en lugar del Teatro México y Olé. Las familias que salen el 16 no irían.</div>'+
+  '<div class="note i"><b>Opción C: dejarlo por fuera.</b> Quien quiera puede ir por su cuenta otra noche: no necesita reserva.</div></div>';
+}
+
+function viewTabla(){
+  var plan=P(), f=famById(S.fam), rw=ruleWarnings(plan);
+  var h = planSeg();
+  h += '<p class="lead">Misma estructura de la tabla de Julián. En el celular se desliza hacia los lados.</p>';
+  h += '<div class="legend"><span class="tag q">Con licor</span><span class="tag fx">Requiere reserva</span><span class="tag no">Ojo / no da el tiempo</span>'+(f?'<span class="tag">Gris: '+esc(f.t)+' no está</span>':'')+'</div>';
+  h += '<div class="tblw"><table><thead><tr><th>Plan</th>'+DAYS.map(function(o){return '<th>'+o.w+'. '+o.d+'</th>';}).join("")+'</tr></thead><tbody>';
+  SLOTS.forEach(function(sl){
+    var any=false; DAYS.forEach(function(o){ (plan[o.d]||[]).forEach(function(x){ if(x.s===sl[0]) any=true; }); });
+    if(!any) return;
+    h += '<tr><td class="rowh">'+sl[1]+'</td>';
+    DAYS.forEach(function(o){
+      var cell=[], alc=false;
+      (plan[o.d]||[]).forEach(function(x,i){
+        if(x.s!==sl[0]) return;
+        if(x.alc) alc=true;
+        var flag = rw[o.d+"|"+i] || (S.plan==="jul" && x.r && x.r[0]!=="i");
+        cell.push((x.at&&!x.cont?'<b>'+hm(x.at)+'</b> ':'')+esc(x.t)+(x.a&&ACT[x.a].res&&!x.cont?' <span class="tag fx">R</span>':'')+(flag?' <span class="tag no">ojo</span>':''));
+      });
+      var out = f && presence(f,o.d).k==="no";
+      h += '<td class="'+(out?"out":alc?"alc":"")+'">'+cell.join("<br><br>")+'</td>';
+    });
+    h += '</tr>';
+  });
+  h += '</tbody></table></div>';
+  return h;
+}
+
+function viewNotas(){
+  var h = '<p class="lead">La base es la propuesta de Julián. Al cruzarla con el Formulario de Experiencias del hotel salen estos puntos. Los ajustes ya están aplicados en «Con ajustes sugeridos», para que Julián los apruebe o los cambie.</p>';
+  h += '<div class="card"><b>Regla que se aplicó en todo el plan:</b> no hay planes de día completo ni salidas temprano al día siguiente de una noche con licor (Xoxi, Bar Xupes).</div>';
+  REVIEW.forEach(function(r,i){
+    h += '<div class="card rv"><div class="n">'+(i+1)+'</div><div><div class="h">'+esc(r.h)+'</div><p>'+esc(r.p)+'</p><div class="fix"><b>Sugerencia:</b> '+esc(r.fix)+'</div></div></div>';
+  });
+  h += pendingCard();
+  h += '<h3>Lo que dice el formulario del hotel</h3><div class="card" style="font-size:.9rem">'+
+   '<div>• Las reservas se hacen con Guest Services y no quedan firmes hasta recibir la confirmación del hotel.</div>'+
+   '<div>• Cancelar con menos de 24 h o no llegar: US$25 por persona. Teatro del Río: MXN 600 por persona.</div>'+
+   '<div>• Hay que estar en el punto de pick up 15 min antes de la hora.</div>'+
+   '<div>• El traslado al aeropuerto de Cancún se reserva con 24 h de anticipación y se recomienda salir 4 h antes del vuelo. Piden el pase de abordar.</div>'+
+   '<div>• El día de salida se puede usar el hotel hasta las 6:00 p. m.</div>'+
+   '<div>• «La Despeinada» sale de La Xentral cada 30 min a Xcaret y Xenses. A Xplor Fuego, solo entre 5:30 y 9:00 p. m.</div>'+
+   '<div>• Xenotes y Catamarán no permiten embarazadas ni personas con restricción de movilidad.</div></div>';
+  return h;
+}
+
+function myReservations(f){
+  var plan=P(), list=[];
+  DAYS.forEach(function(o){
+    var pr=presence(f,o.d); if(pr.k==="no") return;
+    (plan[o.d]||[]).forEach(function(x,i){
+      if(!x.a || x.cont || !ACT[x.a].res) return;
+      if(pr.k==="out" && x.at && x.at>"11:00") return;
+      list.push({d:o.d,w:o.w,x:x,key:S.plan+"|"+o.d+"|"+x.a});
+    });
+  });
+  return list;
+}
+function peopleFor(f,a){
+  var ks=kidsOf(f), ok=ks.filter(function(k){ var v=kidVerdict(a,k); return !v || v.v!=="no"; });
+  var nAd = 2; // todas las habitaciones tienen 2 adultos
+  return {ad:nAd, kids:ok};
+}
+function viewReservas(){
+  var f=famById(S.fam);
+  if(!f) return '<div class="note i">Elige tu familia arriba para ver qué te toca reservar.</div>';
+  var st = store.get("res_"+f.id, {});
+  var list = myReservations(f);
+  var h = planSeg();
+  h += '<p class="lead">Lo que <b>'+esc(f.t)+'</b> debe reservar con Guest Services según el plan elegido. Marca qué van a hacer: queda guardado en este celular.</p>';
+  h += '<div class="card">';
+  if(!list.length) h += '<div class="empty">No hay reservas en este plan para tus días.</div>';
+  list.forEach(function(r){
+    var a=ACT[r.x.a], pp=peopleFor(f,a), v=st[r.key]||"";
+    h += '<div class="res"><div><div class="t" style="font-weight:700">'+esc(a.n)+'</div><div class="d" style="color:var(--muted);font-size:.86rem">'+WFULL[r.w]+' '+r.d+' · '+(r.x.pk?"pick up ":"")+hm(r.x.at)+' · '+(pp.ad+pp.kids.length)+' personas'+(pp.kids.length<kidsOf(f).length?' (no todos los niños pueden)':'')+'</div></div>'+
+      '<select data-res="'+esc(r.key)+'"><option value=""'+(v===""?" selected":"")+'>Pendiente</option><option value="si"'+(v==="si"?" selected":"")+'>Vamos</option><option value="no"'+(v==="no"?" selected":"")+'>No vamos</option><option value="ok"'+(v==="ok"?" selected":"")+'>Ya reservado ✓</option></select></div>';
+  });
+  h += '</div>';
+  // niños
+  var ks=kidsOf(f);
+  if(ks.length){
+    h += '<h3>Niños de la familia</h3><p class="lead">La estatura importa para Xplor Fuego (1,10 m). Si la anotas, el plan te dice si entra.</p><div class="card">';
+    ks.forEach(function(k){
+      h += '<div class="kid"><b>Niño/a '+(k.i+1)+'</b><label>Edad <input type="number" min="0" max="17" inputmode="numeric" data-kid="'+k.i+'" data-f="age" value="'+(k.age===null?"":k.age)+'"></label><label>Estatura (cm) <input type="number" min="50" max="200" inputmode="numeric" data-kid="'+k.i+'" data-f="h" value="'+(k.h||"")+'"></label></div>';
+    });
+    h += '</div>';
+  }
+  // mensaje
+  var wanted = list.filter(function(r){ return st[r.key]==="si"; });
+  h += '<h3>Mensaje para Guest Services</h3>';
+  if(!wanted.length) h += '<p class="lead">Marca «Vamos» en los planes de arriba y aquí se arma el mensaje para pedir las reservas.</p>';
+  else {
+    var txt = "Hola, buen día. Quisiera solicitar estas reservas para mi familia (reserva de grupo de Julián Caviedes).\nNombre del titular: ____\n# de confirmación del hotel: ____\n\n";
+    wanted.forEach(function(r){
+      var a=ACT[r.x.a], pp=peopleFor(f,a);
+      txt += "• "+a.n+" — "+WFULL[r.w].toLowerCase()+" "+r.d+" de enero"+(r.x.pk?", pick up "+hm(r.x.at):", "+hm(r.x.at))+" — "+(pp.ad+pp.kids.length)+" personas ("+pp.ad+" adultos"+(pp.kids.length?", niños de "+pp.kids.map(function(k){return k.age===null?"?":k.age;}).join(" y ")+" años":"")+")\n";
+    });
+    txt += "\nQuedo atento a la confirmación. ¡Gracias!";
+    h += '<textarea id="msg">'+esc(txt)+'</textarea><div><button class="btn" id="copy">Copiar mensaje</button><a class="btn sec" href="https://wa.me/?text='+encodeURIComponent(txt)+'" target="_blank" rel="noopener">Abrir en WhatsApp</a></div>';
+  }
+  return h;
+}
+
+function viewInfo(){
+  var f=famById(S.fam);
+  var h='<p class="lead">Datos del Formulario de Experiencias del hotel, más restricciones de edad y estatura publicadas por Xcaret. Confirmen con el hotel lo marcado «confirmar».</p>';
+  ["xcaret","show","xenses","xoxi","catamaran","xplorfuego","xelha","xenotes","arribabaja","teatro","xingao","xupes","buffet"].forEach(function(id){
+    var a=ACT[id];
+    h += '<div class="card act"><div class="t">'+esc(a.n)+'</div><div class="tags">'+(a.res?'<span class="tag fx">Requiere reserva</span>':'<span class="tag">Sin reserva</span>')+(a.alc?'<span class="tag q">Con licor</span>':'')+(a.minAge?'<span class="tag">Desde '+a.minAge+' años</span>':'')+(a.minH?'<span class="tag">1,10 m</span>':'')+'</div>';
+    h += '<div class="det" style="margin-top:8px"><div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div></div>';
+    if(f){ var tags=kidsOf(f).map(function(k){ var v=kidVerdict(a,k); return '<span class="tag '+(v.v==="si"?"ok":v.v==="no"?"no":"q")+'">'+(k.age===null?"Niño/a":"De "+k.age)+': '+(v.v==="si"?"✓":v.v==="no"?"✗ "+v.why:v.why)+'</span>'; }); if(tags.length) h+='<div class="tags">'+tags.join("")+'</div>'; }
+    h += '</div>';
+  });
+  h += '<p class="foot">Página hecha por Nico para el grupo. Lo que marques se guarda solo en tu celular.</p>';
+  return h;
+}
+
+function render(){
+  renderTabs();
+  var v = S.tab==="tabla"?viewTabla(): S.tab==="notas"?viewNotas(): S.tab==="reservas"?viewReservas(): S.tab==="info"?viewInfo(): viewDia();
+  document.getElementById("view").innerHTML = v;
+  save();
+}
+
+/* ============ Eventos ============ */
+var sel=document.getElementById("fam");
+sel.innerHTML = '<option value="">— Elige tu familia —</option>'+FAMS.map(function(f){ return '<option value="'+f.id+'">'+esc(f.t)+'</option>'; }).join("");
+sel.value=S.fam;
+sel.addEventListener("change",function(){ S.fam=sel.value; render(); });
+document.addEventListener("click",function(e){
+  var b=e.target.closest ? e.target.closest("button") : null; if(!b) return;
+  if(b.getAttribute("data-tab")){ S.tab=b.getAttribute("data-tab"); render(); window.scrollTo(0,0); }
+  else if(b.getAttribute("data-plan")){ S.plan=b.getAttribute("data-plan"); render(); }
+  else if(b.getAttribute("data-day")){ S.day=+b.getAttribute("data-day"); render(); }
+  else if(b.getAttribute("data-more")){ var k=b.getAttribute("data-more"); S.open[k]=!S.open[k]; render(); }
+  else if(b.id==="copy"){ var t=document.getElementById("msg"); t.select();
+    var done=function(){ b.textContent="¡Copiado!"; setTimeout(function(){ b.textContent="Copiar mensaje"; },1800); };
+    if(navigator.clipboard){ navigator.clipboard.writeText(t.value).then(done,function(){ try{document.execCommand("copy");done();}catch(x){} }); } else { try{document.execCommand("copy");done();}catch(x){} } }
+});
+document.addEventListener("change",function(e){
+  var t=e.target, f=famById(S.fam); if(!f) return;
+  if(t.getAttribute("data-res")){ var st=store.get("res_"+f.id,{}); st[t.getAttribute("data-res")]=t.value; store.set("res_"+f.id,st); render(); }
+  else if(t.getAttribute("data-kid")!==null){ var ov=store.get("kids_"+f.id,{}), i=t.getAttribute("data-kid"); ov[i]=ov[i]||{}; ov[i][t.getAttribute("data-f")]=t.value; store.set("kids_"+f.id,ov); render(); }
+});
+if(DAYS.every(function(o){return o.d!==S.day;})) S.day=10;
+render();
+</script>
+</body>
+</html>
