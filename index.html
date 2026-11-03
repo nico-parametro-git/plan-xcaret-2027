@@ -109,10 +109,10 @@ textarea{width:100%;min-height:180px;border:1px solid var(--line);border-radius:
 <body>
 <header><div class="wrap">
   <div class="eyebrow">Hotel Xcaret México · 10–17 enero 2027</div>
-  <h1>Plan final del grupo</h1>
-  <p>Plan acordado con Julián, día a día, con horarios del hotel, traslados y qué puede hacer cada niño.</p>
+  <h1 id="h1">Plan final del grupo</h1>
+  <p id="hp">Plan acordado con Julián, día a día, con horarios del hotel, traslados y qué puede hacer cada niño.</p>
 </div></header>
-<div class="who"><div class="wrap">
+<div class="who" id="who"><div class="wrap">
   <label for="fam">¿Quién eres? (así te muestro tu plan)</label>
   <select id="fam"></select>
 </div></div>
@@ -126,6 +126,9 @@ var store = {
   get: function(k, d){ try{ var v = localStorage.getItem("xc27_"+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
   set: function(k, v){ try{ localStorage.setItem("xc27_"+k, JSON.stringify(v)); }catch(e){} }
 };
+
+/* Vista limpia para el hotel: ?hotel (sin notas de cambios, avisos ni selectores) */
+var HOTEL = /[?&]hotel(=|&|$)/.test(location.search);
 
 /* ============ Grupo ============ */
 var FAMS = [
@@ -266,7 +269,7 @@ var ADJ = {
  13:[{s:"des",t:"Buffet sin afán (abre hasta las 12)",a:"buffet"},
      {s:"man",t:"Mañana libre: descanso después de Xoxi",c:"Xenses pasa a la tarde: después de volver de Xoxi a las 12:30 a. m., salir a las 9 a. m. es muy pesado."},
      {s:"alm",t:"Buffet: La Xentral",a:"buffet"},
-     {s:"tar",t:"Xenses: ciudad al revés",a:"xenses",at:"14:00",pk:true,d:"Volver al hotel hacia las 5:00 p. m. Si prefieren llegar con energía a Xplor Fuego, pueden saltárselo.",c:"Antes era a las 9 a. m.; el hotel también tiene pick up a las 2 p. m."},
+     {s:"tar",t:"Xenses: ciudad al revés",a:"xenses",at:"14:00",pk:true,dh:"Regreso al hotel hacia las 5:00 p. m.",d:"Volver al hotel hacia las 5:00 p. m. Si prefieren llegar con energía a Xplor Fuego, pueden saltárselo.",c:"Antes era a las 9 a. m.; el hotel también tiene pick up a las 2 p. m."},
      {s:"cen",t:"Xplor Fuego: tirolesas y anfibios de noche, buffet incluido",a:"xplorfuego",at:"18:00",d:"Shuttle desde La Xentral entre 5:30 y 9:00 p. m.",c:"Viene del jueves: después del catamarán no alcanzaba (llegan ~8 p. m. y el último shuttle es a las 9)."},
      {s:"noc",t:"Xplor Fuego — regreso al hotel ~11:00 p. m.",a:"xplorfuego",cont:true}],
  14:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
@@ -274,7 +277,7 @@ var ADJ = {
      {s:"alm",t:"En Isla Mujeres"},
      {s:"tar",t:"Catamarán — llegada al hotel ~8:00 p. m.",a:"catamaran",cont:true},
      {s:"cen",t:"Xin-Gao Teppanyaki — despedida de Pamela y Jean",a:"xingao",at:"21:00",c:"Pasa de 8:30 a 9:00 p. m. para dar tiempo de llegar del catamarán y cambiarse."},
-     {s:"noc",t:"Bar Xupes (opcional, adultos) — despedida de Pamela y Jean, noche corta",a:"xupes",alc:true,c:"Noche corta: al otro día el pick up a Xel-Há es a las 7:15 a. m."}],
+     {s:"noc",t:"Bar Xupes (opcional, adultos) — despedida de Pamela y Jean, noche corta",th:"Bar Xupes (opcional, adultos) — despedida de Pamela y Jean",a:"xupes",alc:true,c:"Noche corta: al otro día el pick up a Xel-Há es a las 7:15 a. m."}],
  15:[{s:"des",t:"Desayuno continental",at:"06:30",a:"buffet",d:"El Mercado o La Xentral, 6:30–7:00."},
      {s:"man",t:"Xel-Há + Tulum",a:"xelha",at:"07:15",pk:true,okAlc:true,c:"Viene del jueves. La noche anterior hay Bar Xupes: que sea corta."},
      {s:"man",t:"Salen al aeropuerto: Pamela y Jean"},
@@ -361,30 +364,33 @@ function dayHasIssue(plan,d){
 
 /* ============ Estado ============ */
 var S = {
-  fam: store.get("fam",""),
-  tab: store.get("tab","dia"),
-  plan: store.get("plan2","adj"),
+  fam: HOTEL ? "" : store.get("fam",""),
+  tab: HOTEL ? "dia" : store.get("tab","dia"),
+  plan: HOTEL ? "adj" : store.get("plan2","adj"),
   day: store.get("day",10),
   open: {}
 };
 function P(){ return S.plan==="adj" ? ADJ : JUL; }
-function save(){ store.set("fam",S.fam); store.set("tab",S.tab); store.set("plan2",S.plan); store.set("day",S.day); }
+function save(){ if(HOTEL) return; store.set("fam",S.fam); store.set("tab",S.tab); store.set("plan2",S.plan); store.set("day",S.day); }
 
 /* ============ Render ============ */
-var TABS=[["dia","Día a día"],["tabla","Tabla"],["notas","Notas al plan"],["reservas","Mis reservas"],["info","Actividades"]];
+var TABS = HOTEL ? [["dia","Día a día"],["tabla","Tabla"],["grupo","Reservas del grupo"]]
+                 : [["dia","Día a día"],["tabla","Tabla"],["notas","Notas al plan"],["reservas","Mis reservas"],["info","Actividades"]];
 function renderTabs(){
   document.getElementById("tabs").innerHTML = TABS.map(function(t){
     return '<button data-tab="'+t[0]+'" class="'+(S.tab===t[0]?"on":"")+'">'+t[1]+'</button>'; }).join("");
 }
 function planSeg(){
+  if(HOTEL) return "";
   return '<div class="seg"><button data-plan="adj" class="'+(S.plan==="adj"?"on":"")+'">Plan final</button>'+
          '<button data-plan="jul" class="'+(S.plan==="jul"?"on":"")+'">Propuesta original de Julián</button></div>';
 }
 
 function itemHTML(x, d, i, f, rw){
   var a = x.a ? ACT[x.a] : null, h = '<div class="it'+(x.cont?" cont":"")+'">';
-  h += '<div class="t">'+esc(x.t)+'</div>';
-  if(x.d) h += '<div class="d">'+esc(x.d)+'</div>';
+  var tt = HOTEL && x.th ? x.th : x.t, dd = HOTEL && x.dh!==undefined ? x.dh : x.d;
+  h += '<div class="t">'+esc(tt)+'</div>';
+  if(dd) h += '<div class="d">'+esc(dd)+'</div>';
   var tags=[];
   if(a && !x.cont){
     if(a.res) tags.push('<span class="tag fx">Requiere reserva</span>');
@@ -410,10 +416,11 @@ function itemHTML(x, d, i, f, rw){
     var anyNo = kidsOf(f).some(function(k){ var v=kidVerdict(a,k); return v && v.v==="no"; });
     if(anyNo) h += '<div class="note i"><b>Para los niños:</b> '+esc(a.alt)+'</div>';
   }
+  if(HOTEL) return h+'</div>';
   if(rw[d+"|"+i]) h += '<div class="note b"><b>Ojo:</b> '+esc(rw[d+"|"+i])+'</div>';
   if(S.plan==="jul" && x.r) h += '<div class="note '+(x.r[0]==="b"?"b":x.r[0]==="w"?"w":"i")+'">'+esc(x.r[1])+'</div>';
   if(S.plan==="adj" && x.c) h += '<div class="note c"><b>Cambio:</b> '+esc(x.c)+'</div>';
-  if(a && !x.cont){
+  if(a && !x.cont && !HOTEL){
     var key=d+"|"+i;
     h += '<button class="more" data-more="'+key+'">'+(S.open[key]?"Ocultar detalles":"Horarios, traslado y edades")+'</button>';
     if(S.open[key]) h += '<div class="det"><div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div>'+(a.res?'<div><b>Reserva:</b> con Guest Services (formulario del hotel). Cancelar con menos de 24 h: US$25 por persona.</div>':'<div><b>Reserva:</b> no necesita.</div>')+'</div>';
@@ -422,10 +429,10 @@ function itemHTML(x, d, i, f, rw){
 }
 
 function viewDia(){
-  var plan=P(), f=famById(S.fam), d=S.day, rw=ruleWarnings(plan);
+  var plan=P(), f=famById(S.fam), d=S.day, rw=HOTEL?{}:ruleWarnings(plan);
   var h = planSeg();
   h += '<div class="days">'+DAYS.map(function(o){
-    return '<button data-day="'+o.d+'" class="'+(o.d===d?"on":"")+'"><span>'+o.w+'</span><b>'+o.d+'</b><i class="'+(dayHasIssue(plan,o.d)?"w":"")+'"></i></button>'; }).join("")+'</div>';
+    return '<button data-day="'+o.d+'" class="'+(o.d===d?"on":"")+'"><span>'+o.w+'</span><b>'+o.d+'</b><i class="'+(!HOTEL&&dayHasIssue(plan,o.d)?"w":"")+'"></i></button>'; }).join("")+'</div>';
   var o=dayObj(d), pr = f ? presence(f,d) : null;
   h += '<div class="daytitle"><h2>'+WFULL[o.w]+' '+d+' de enero</h2>'+(pr&&pr.l?'<span class="pres"><b>'+esc(f.t)+':</b> '+esc(pr.l)+'</span>':'')+'</div>';
   if(f && pr.k==="no"){ h += '<div class="note i">'+esc(f.t)+': '+esc(pr.l)+'. Igual te muestro lo que hace el resto del grupo.</div>'; }
@@ -444,6 +451,7 @@ function viewDia(){
     h += '</div></div>';
   });
   h += '</div>';
+  if(HOTEL) return h;
   h += suggestBox(WFULL[o.w].toLowerCase()+" "+d+" de enero");
   if(!f) h += '<div class="note i">Elige tu familia arriba y te digo qué puede hacer cada niño y a qué hora salir de la habitación.</div>';
   return h;
@@ -459,10 +467,10 @@ function suggestBox(about){
 }
 
 function viewTabla(){
-  var plan=P(), f=famById(S.fam), rw=ruleWarnings(plan);
+  var plan=P(), f=famById(S.fam), rw=HOTEL?{}:ruleWarnings(plan);
   var h = planSeg();
-  h += '<p class="lead">Misma estructura de la tabla de Julián. En el celular se desliza hacia los lados.</p>';
-  h += '<div class="legend"><span class="tag q">Con licor</span><span class="tag fx">Requiere reserva</span><span class="tag no">Ojo / no da el tiempo</span>'+(f?'<span class="tag">Gris: '+esc(f.t)+' no está</span>':'')+'</div>';
+  h += '<p class="lead">'+(HOTEL?'Itinerario completo del grupo.':'Misma estructura de la tabla de Julián.')+' En el celular se desliza hacia los lados.</p>';
+  h += '<div class="legend"><span class="tag q">Con licor</span><span class="tag fx">Requiere reserva</span><span class="tag no">Ojo / no da el tiempo</span>'.replace(HOTEL?/.*/:/^$/,"")+(f?'<span class="tag">Gris: '+esc(f.t)+' no está</span>':'')+'</div>';
   h += '<div class="tblw"><table><thead><tr><th>Plan</th>'+DAYS.map(function(o){return '<th>'+o.w+'. '+o.d+'</th>';}).join("")+'</tr></thead><tbody>';
   SLOTS.forEach(function(sl){
     var any=false; DAYS.forEach(function(o){ (plan[o.d]||[]).forEach(function(x){ if(x.s===sl[0]) any=true; }); });
@@ -474,7 +482,7 @@ function viewTabla(){
         if(x.s!==sl[0]) return;
         if(x.alc) alc=true;
         var flag = rw[o.d+"|"+i] || (S.plan==="jul" && x.r && x.r[0]!=="i");
-        cell.push((x.at&&!x.cont?'<b>'+hm(x.at)+'</b> ':'')+esc(x.t)+(x.a&&ACT[x.a].res&&!x.cont?' <span class="tag fx">R</span>':'')+(flag?' <span class="tag no">ojo</span>':''));
+        cell.push((x.at&&!x.cont?'<b>'+hm(x.at)+'</b> ':'')+esc(HOTEL&&x.th?x.th:x.t)+(x.a&&ACT[x.a].res&&!x.cont?' <span class="tag fx">R</span>':'')+(flag?' <span class="tag no">ojo</span>':''));
       });
       var out = f && presence(f,o.d).k==="no";
       h += '<td class="'+(out?"out":alc?"alc":"")+'">'+cell.join("<br><br>")+'</td>';
@@ -574,14 +582,36 @@ function viewInfo(){
   return h;
 }
 
+/* Vista para el hotel: reservas por fecha y llegadas/salidas */
+function viewGrupo(){
+  var h='<p class="lead">Experiencias que el grupo reserva con Guest Services, en orden de fecha.</p><div class="card">';
+  DAYS.forEach(function(o){
+    (ADJ[o.d]||[]).forEach(function(x){
+      if(!x.a || x.cont || !ACT[x.a].res) return;
+      h += '<div class="res"><div><div style="font-weight:700">'+esc(ACT[x.a].n)+'</div><div style="color:var(--muted);font-size:.86rem">'+esc(x.th||x.t)+'</div></div>'+
+           '<div style="text-align:right;font-size:.86rem;white-space:nowrap"><b>'+WFULL[o.w]+' '+o.d+'</b><br>'+(x.pk?'Pick up ':'')+hm(x.at)+'</div></div>';
+    });
+  });
+  h += '</div><h3>Llegadas y salidas</h3><div class="card">';
+  FAMS.forEach(function(f){
+    h += '<div class="res"><div style="font-weight:700">'+esc(f.t)+(f.id==="felipe"?' <span style="font-weight:400;color:var(--muted)">(por confirmar)</span>':'')+'</div><div style="font-size:.86rem;white-space:nowrap">'+f.inD+' → '+f.outD+' de enero</div></div>';
+  });
+  return h+'</div>';
+}
+
 function render(){
   renderTabs();
-  var v = S.tab==="tabla"?viewTabla(): S.tab==="notas"?viewNotas(): S.tab==="reservas"?viewReservas(): S.tab==="info"?viewInfo(): viewDia();
+  var v = S.tab==="grupo"?viewGrupo(): S.tab==="tabla"?viewTabla(): S.tab==="notas"?viewNotas(): S.tab==="reservas"?viewReservas(): S.tab==="info"?viewInfo(): viewDia();
   document.getElementById("view").innerHTML = v;
   save();
 }
 
 /* ============ Eventos ============ */
+if(HOTEL){
+  document.getElementById("who").style.display="none";
+  document.getElementById("h1").textContent="Plan del grupo · Julián Caviedes";
+  document.getElementById("hp").textContent="Itinerario día a día del grupo, del 10 al 17 de enero de 2027.";
+}
 var sel=document.getElementById("fam");
 sel.innerHTML = '<option value="">— Elige tu familia —</option>'+FAMS.map(function(f){ return '<option value="'+f.id+'">'+esc(f.t)+'</option>'; }).join("");
 sel.value=S.fam;
