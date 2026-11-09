@@ -594,7 +594,7 @@ function viewGrupo(){
   });
   h += '</div><h3>Llegadas y salidas</h3><div class="card">';
   FAMS.forEach(function(f){
-    h += '<div class="res"><div style="font-weight:700">'+esc(f.t)+(f.id==="felipe"?' <span style="font-weight:400;color:var(--muted)">(por confirmar)</span>':'')+'</div><div style="font-size:.86rem;white-space:nowrap">'+f.inD+' → '+f.outD+' de enero</div></div>';
+    h += '<div class="res"><div style="font-weight:700">'+esc(f.t)+'</div><div style="font-size:.86rem;white-space:nowrap">'+f.inD+' → '+f.outD+' de enero</div></div>';
   });
   return h+'</div>';
 }
