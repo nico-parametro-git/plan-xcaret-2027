@@ -187,7 +187,16 @@ var ACT = {
   arribabaja:{n:"Arriba Baja", res:true, minAge:13, where:"Restaurante dentro del hotel (Fase 2) · a pie",
     hours:"Reserva del grupo a las 21:00 · Código de vestimenta: resort casual. No se permite traje de baño ni ropa mojada.", kids:"Solo adultos y mayores de 13 años.",
     alt:"Para los menores de 13: Club infantil del hotel (Club Xiquillos, 4 a 12 años; confirmar con el hotel si abre en la noche) o servicio de niñera para menores de 4."},
-  xupes:{n:"Bar Xupes", res:false, adults:true, alc:true, where:"Dentro del hotel", hours:"Noche.", kids:"Solo adultos."},
+  xupes:{n:"Bar Xupes", res:false, adults:true, alc:true, where:"Dentro del hotel · a pie", hours:"Noche. Se anima después de las 10:00 p. m. (hora de cierre: confirmar con el hotel).", kids:"Solo adultos.",
+    about:"La discoteca del hotel: DJ y música en vivo (house, nu-disco, mezclas), barra principal, zona lounge y mezzanine. Es para bailar."},
+  maquinitas:{n:"Bar Las Maquinitas", res:false, alc:true, where:"Dentro del hotel · a pie (ubicación exacta: preguntar en el hotel)", hours:"Noche. Una guía dice 6:00 p. m.–1:00 a. m.: confirmar con el hotel.", kids:"Familiar: los niños pueden entrar y jugar.",
+    about:"Bar retro tipo arcade: maquinitas, air hockey y billar, con DJ. Los adultos se toman algo mientras los niños juegan. Es la opción más fácil si van con niños."},
+  flamingos:{n:"Bar Flamingos", res:false, alc:true, where:"Dentro del hotel, zona del lobby · a pie (confirmar con el hotel)", hours:"Tarde y noche (horario por confirmar).", kids:"Familiar temprano en la noche; más tarde, ambiente de adultos.",
+    about:"Bar tipo salón con música en vivo. Bueno para conversar y tomar algo en grupo después de la cena, sin ir a una discoteca."},
+  rooftop:{n:"Rooftops de las casas", res:false, alc:true, where:"Azoteas de algunos edificios (casas) del hotel · a pie. Una guía menciona un bar en la azotea de Casa Cielo, cerca de Tama-Mon: confirmar.", hours:"Atardecer y noche. Una guía dice 6:00 p. m.–12:00 a. m.: confirmar con el hotel.", kids:"Por confirmar en cada casa. El de Casa Fuego no sirve: es solo para adultos hospedados en Casa Fuego.",
+    about:"Terrazas al aire libre con vista sobre el hotel y el mar; algunas tienen DJ al atardecer. Ambiente más tranquilo para tomar algo bajo el cielo."},
+  bares:{n:"Tragos en el hotel (a elegir)", res:false, alc:true, where:"Dentro del hotel · a pie", hours:"Después de la cena. Ver horarios de cada opción en Actividades.", kids:"Las Maquinitas y Flamingos (temprano) son para todos. Xupes es solo para adultos.",
+    about:"Cuatro opciones: Las Maquinitas (arcade retro, con niños), Flamingos (música en vivo, para conversar), un rooftop (al aire libre, tranquilo) o Xupes (discoteca, solo adultos)."},
   xoxi:{n:"Xoximilco", res:true, alc:true, where:"Bus desde el hotel · ~1 h (queda cerca del aeropuerto de Cancún)",
     hours:"Lun–Sáb · Pick up 18:05 en La Xentral · Regreso al hotel ~00:30 · Cena y bebidas incluidas (trajineras con mariachi y tequila). Llevar zapato cómodo, repelente y efectivo.",
     kids:"Familiar; para menores de 5 confirmar con el hotel. Regreso a las 00:30: los pequeños llegan dormidos."},
@@ -280,7 +289,7 @@ var ADJ = {
      {s:"alm",t:"Buffet: Parque Xcaret"},
      {s:"tar",t:"Parque Xcaret — volver al hotel hacia las 5:30 p. m. para alistarse",a:"xcaret",cont:true},
      {s:"cen",t:"Teatro del Río — Corazón de Madera",a:"teatro",at:"19:00",pl:"Fase 1",n:21,d:"Llegar 6:45 p. m. Resort casual.",c:"Viene del miércoles y reemplaza Arriba Baja (restaurante solo para mayores de 13): así van también los niños. Prioridad: atracciones sobre restaurantes."},
-     {s:"noc",t:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true}],
+     {s:"noc",t:"Tragos (opcional): Las Maquinitas, Flamingos, rooftop o Xupes",a:"bares",alc:true,d:"Elijan en grupo. Las características de cada uno están en Actividades."}],
  12:[{s:"des",t:"Buffet",at:"08:00",a:"buffet"},
      {s:"man",t:"Hotel: piscina y niños"},
      {s:"alm",t:"Buffet: El Mercado",a:"buffet"},
@@ -298,7 +307,7 @@ var ADJ = {
      {s:"alm",t:"Lonchera en Isla Mujeres + playa",d:"Cada familia lleva su lonchera. Bebidas, camastros y algo de comer se pagan aparte, en efectivo."},
      {s:"tar",t:"Catamarán — llegada al hotel ~8:00 p. m.",a:"catamaran",cont:true,d:"Hay 1 hora para bañarse y cambiarse antes de la cena."},
      {s:"cen",t:"Arriba Baja — despedida de Pamela y Jean (solo adultos)",a:"arribabaja",at:"21:00",pl:"Fase 2",n:20,d:"Resort casual. Los niños se quedan en el club infantil o con niñera: pídanlo al hotel con tiempo.",c:"Versión final: Arriba Baja a las 9:00 p. m. en lugar de Xin-Gao."},
-     {s:"noc",t:"Bar Xupes (opcional, adultos) — noche corta",th:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true,c:"Noche corta: al otro día el pick up a Xenses es a las 9:00 a. m."}],
+     {s:"noc",t:"Tragos (opcional): Las Maquinitas, Flamingos, rooftop o Xupes — noche corta",th:"Tragos (opcional): Las Maquinitas, Flamingos, rooftop o Xupes",a:"bares",alc:true,d:"Elijan en grupo. Las características de cada uno están en Actividades.",c:"Noche corta: al otro día el pick up a Xenses es a las 9:00 a. m."}],
  15:[{s:"des",t:"Desayuno buffet",at:"07:45",a:"buffet",d:"A las 8:45 hay que estar en La Xentral."},
      {s:"man",t:"Xenses: ciudad al revés",a:"xenses",at:"09:00",pk:true,okAlc:true,pl:"La Xentral",n:31,d:"Llevar zapatos de agua, ropa para mojarse, toalla y funda para el celular. Es de medio día: se vuelve al hotel para el almuerzo.",c:"Versión final: Xenses pasa al viernes en la mañana."},
      {s:"man",t:"Salen al aeropuerto: Pamela y Jean"},
@@ -312,7 +321,7 @@ var ADJ = {
      {s:"alm",t:"Comida en Xenotes (incluida)"},
      {s:"tar",t:"Regreso de Xenotes ~5:30 p. m.",d:"Poco margen: bañarse y alistarse rápido para el Teatro."},
      {s:"cen",t:"Teatro del Río — México y Olé",a:"teatro",at:"19:00",pl:"Fase 1",n:14,d:"Llegar 6:45 p. m. Resort casual."},
-     {s:"noc",t:"Bar Xupes (opcional, adultos)",a:"xupes",alc:true,c:"Aquí sí, porque el domingo es mañana libre."}],
+     {s:"noc",t:"Tragos (opcional): Las Maquinitas, Flamingos, rooftop o Xupes",a:"bares",alc:true,d:"Elijan en grupo. Las características de cada uno están en Actividades.",c:"Aquí sí, porque el domingo es mañana libre."}],
  17:JUL[17]
 };
 
@@ -329,7 +338,7 @@ var REVIEW = [
   fix:"Ir bien desayunados, llevar lonchera, efectivo y pasaporte físico. Pedir con tiempo el club infantil o la niñera para la noche."},
  {h:"Viernes 15 · Xenses y Tama-Mon",
   p:"Xenses pasa al viernes en la mañana (pick up 9:00) y en la noche hay cena de grupo en Tama-Mon Teppanyaki a las 8:00 p. m.",
-  fix:"El Bar Xupes del jueves, si va, que sea corto."},
+  fix:"Los tragos del jueves, si van, que sean cortos: al otro día el pick up a Xenses es a las 9:00 a. m."},
  {h:"Sábado 16 · Xenotes y Teatro del Río",
   p:"Xenotes (8:50) es para quienes se quedan hasta el 17 y exige 6 años cumplidos. Se vuelve hacia las 5:30 p. m. y el Teatro es a las 7:00 p. m.",
   fix:"Poco margen: alistarse rápido al volver."},
@@ -443,7 +452,7 @@ function itemHTML(x, d, i, f, rw){
   if(a && !x.cont && !HOTEL){
     var key=d+"|"+i;
     h += '<button class="more" data-more="'+key+'">'+(S.open[key]?"Ocultar detalles":"Horarios, traslado y edades")+'</button>';
-    if(S.open[key]) h += '<div class="det"><div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div>'+(a.res?'<div><b>Reserva:</b> con Guest Services (formulario del hotel). Cancelar con menos de 24 h: US$25 por persona.</div>':'<div><b>Reserva:</b> no necesita.</div>')+'</div>';
+    if(S.open[key]) h += '<div class="det">'+(a.about?'<div><b>Qué es:</b> '+esc(a.about)+'</div>':'')+'<div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div>'+(a.res?'<div><b>Reserva:</b> con Guest Services (formulario del hotel). Cancelar con menos de 24 h: US$25 por persona.</div>':'<div><b>Reserva:</b> no necesita.</div>')+'</div>';
   }
   return h+'</div>';
 }
@@ -676,10 +685,10 @@ function viewPrint(){
 function viewInfo(){
   var f=famById(S.fam);
   var h='<p class="lead">Datos del Formulario de Experiencias del hotel, más restricciones de edad y estatura publicadas por Xcaret. Confirmen con el hotel lo marcado «confirmar».</p>';
-  ["xcaret","show","xenses","xoxi","catamaran","xplorfuego","xelha","xenotes","arribabaja","teatro","tamamon","xingao","xupes","buffet"].forEach(function(id){
+  ["xcaret","show","xenses","xoxi","catamaran","xplorfuego","xelha","xenotes","arribabaja","teatro","tamamon","xingao","maquinitas","flamingos","rooftop","xupes","buffet"].forEach(function(id){
     var a=ACT[id];
     h += '<div class="card act"><div class="t">'+esc(a.n)+'</div><div class="tags">'+(a.res?'<span class="tag fx">Requiere reserva</span>':'<span class="tag">Sin reserva</span>')+(a.alc?'<span class="tag q">Con licor</span>':'')+(a.minAge?'<span class="tag">Desde '+a.minAge+' años</span>':'')+(a.minH?'<span class="tag">1,10 m</span>':'')+'</div>';
-    h += '<div class="det" style="margin-top:8px"><div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div></div>';
+    h += '<div class="det" style="margin-top:8px">'+(a.about?'<div><b>Qué es:</b> '+esc(a.about)+'</div>':'')+'<div><b>Horario:</b> '+esc(a.hours)+'</div><div><b>Cómo se llega:</b> '+esc(a.where)+'</div><div><b>Niños:</b> '+esc(a.kids)+'</div></div>';
     if(f){ var tags=kidsOf(f).map(function(k){ var v=kidVerdict(a,k); return '<span class="tag '+(v.v==="si"?"ok":v.v==="no"?"no":"q")+'">'+(k.age===null?"Niño/a":"De "+k.age)+': '+(v.v==="si"?"✓":v.v==="no"?"✗ "+v.why:v.why)+'</span>'; }); if(tags.length) h+='<div class="tags">'+tags.join("")+'</div>'; }
     h += '</div>';
   });
