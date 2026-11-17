@@ -104,13 +104,30 @@ textarea{width:100%;min-height:180px;border:1px solid var(--line);border-radius:
 .act .t{font-weight:700;font-size:1rem}
 .foot{font-size:.78rem;color:var(--muted);margin-top:24px}
 @media (min-width:720px){ header h1{font-size:1.8rem} .slot{grid-template-columns:110px 1fr} }
+table.gt{min-width:0;width:100%;font-size:.84rem}
+.card > div + div{margin-top:4px}
+.pdfhead{background:var(--dark);color:#F2F2F4;border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.pdfhead .eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#FF7AB8;font-weight:700}
+.pdfhead h1{margin:4px 0;font-size:1.5rem}
+.pdfhead p{margin:0;color:#B9B8C0;font-size:.82rem}
+body.print header,body.print .who,body.print nav{display:none}
+body.print main{padding-top:0}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,.note,tr,.slot{break-inside:avoid}
+  .tblw{overflow:visible}
+  h3{break-after:avoid}
+  .pbreak{break-before:page}
+  .pday{break-inside:avoid}
+}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <div class="eyebrow">Hotel Xcaret México · 10–17 enero 2027</div>
   <h1 id="h1">Plan final del grupo</h1>
-  <p id="hp">Plan acordado con Julián, día a día, con horarios del hotel, traslados y qué puede hacer cada niño.</p>
+  <p id="hp">Versión final de reservas (16 nov), día a día. Lean también la pestaña «Antes de ir»: depósito, bloqueador, ropa, presupuesto y horarios.</p>
 </div></header>
 <div class="who" id="who"><div class="wrap">
   <label for="fam">¿Quién eres? (así te muestro tu plan)</label>
@@ -129,6 +146,8 @@ var store = {
 
 /* Vista limpia para el hotel: ?hotel (sin notas de cambios, avisos ni selectores) */
 var HOTEL = /[?&]hotel(=|&|$)/.test(location.search);
+/* Versión para PDF: ?pdf (guía + plan completo, sin selectores ni notas) */
+var PRINT = /[?&]pdf(=|&|$)/.test(location.search);
 
 /* ============ Grupo ============ */
 var FAMS = [
@@ -365,7 +384,7 @@ function dayHasIssue(plan,d){
 var S = {
   fam: HOTEL ? "" : store.get("fam",""),
   tab: HOTEL ? "dia" : store.get("tab","dia"),
-  plan: HOTEL ? "adj" : store.get("plan2","adj"),
+  plan: (HOTEL||PRINT) ? "adj" : store.get("plan2","adj"),
   day: store.get("day",10),
   open: {}
 };
@@ -417,7 +436,7 @@ function itemHTML(x, d, i, f, rw){
     var anyNo = kidsOf(f).some(function(k){ var v=kidVerdict(a,k); return v && v.v==="no"; });
     if(anyNo) h += '<div class="note i"><b>Para los niños:</b> '+esc(a.alt)+'</div>';
   }
-  if(HOTEL) return h+'</div>';
+  if(HOTEL || PRINT) return h+'</div>';
   if(rw[d+"|"+i]) h += '<div class="note b"><b>Ojo:</b> '+esc(rw[d+"|"+i])+'</div>';
   if(S.plan==="jul" && x.r) h += '<div class="note '+(x.r[0]==="b"?"b":x.r[0]==="w"?"w":"i")+'">'+esc(x.r[1])+'</div>';
   if(S.plan==="adj" && x.c) h += '<div class="note c"><b>Cambio:</b> '+esc(x.c)+'</div>';
@@ -531,20 +550,21 @@ function peopleFor(f,a){
 }
 function viewReservas(){
   var f=famById(S.fam);
-  if(!f) return '<div class="note i">Elige tu familia arriba para ver qué te toca reservar.</div>';
-  var st = store.get("res_"+f.id, {});
-  var list = myReservations(f);
-  var h = planSeg();
-  h += '<p class="lead">Lo que <b>'+esc(f.t)+'</b> debe reservar con Guest Services según el plan elegido. Marca qué van a hacer: queda guardado en este celular.</p>';
-  h += '<div class="card">';
-  if(!list.length) h += '<div class="empty">No hay reservas en este plan para tus días.</div>';
-  list.forEach(function(r){
-    var a=ACT[r.x.a], pp=peopleFor(f,a), v=st[r.key]||"";
-    h += '<div class="res"><div><div class="t" style="font-weight:700">'+esc(a.n)+'</div><div class="d" style="color:var(--muted);font-size:.86rem">'+WFULL[r.w]+' '+r.d+' · '+(r.x.pk?"pick up ":"")+hm(r.x.at)+' · '+(pp.ad+pp.kids.length)+' personas'+(pp.kids.length<kidsOf(f).length?' (no todos los niños pueden)':'')+'</div></div>'+
-      '<select data-res="'+esc(r.key)+'"><option value=""'+(v===""?" selected":"")+'>Pendiente</option><option value="si"'+(v==="si"?" selected":"")+'>Vamos</option><option value="no"'+(v==="no"?" selected":"")+'>No vamos</option><option value="ok"'+(v==="ok"?" selected":"")+'>Ya reservado ✓</option></select></div>';
+  if(!f) return '<div class="note i">Elige tu familia arriba para ver tus planes reservados.</div>';
+  var h = '<p class="lead">Planes que el grupo ya reservó y en los que está <b>'+esc(f.t)+'</b>. No hay que reservar nada más: solo estar a tiempo.</p><div class="card">';
+  var any=false;
+  DAYS.forEach(function(o){
+    var pr=presence(f,o.d); if(pr.k==="no") return;
+    (ADJ[o.d]||[]).forEach(function(x){
+      if(!x.a || x.cont || !ACT[x.a].res) return;
+      if(pr.k==="out" && (x.pk || (x.at && x.at>"11:00"))) return;
+      any=true;
+      var a=ACT[x.a], pp=peopleFor(f,a), nk=kidsOf(f).length;
+      h += '<div class="res"><div><div style="font-weight:700">'+esc(a.n)+'</div><div style="color:var(--muted);font-size:.86rem">'+WFULL[o.w]+' '+o.d+' · '+(x.pk?"pick up ":"")+hm(x.at)+(x.pl?' · '+esc(x.pl):'')+' · '+(pp.ad+pp.kids.length)+' de tu familia'+(pp.kids.length<nk?' (no todos los niños pueden)':'')+'</div></div><span class="tag ok">Reservado</span></div>';
+    });
   });
+  if(!any) h += '<div class="empty">No hay planes reservados en tus días.</div>';
   h += '</div>';
-  // niños
   var ks=kidsOf(f);
   if(ks.length){
     h += '<h3>Niños de la familia</h3><p class="lead">La estatura importa para Xplor Fuego (1,10 m). Si la anotas, el plan te dice si entra.</p><div class="card">';
@@ -553,19 +573,103 @@ function viewReservas(){
     });
     h += '</div>';
   }
-  // mensaje
-  var wanted = list.filter(function(r){ return st[r.key]==="si"; });
-  h += '<h3>Mensaje para Guest Services</h3>';
-  if(!wanted.length) h += '<p class="lead">Marca «Vamos» en los planes de arriba y aquí se arma el mensaje para pedir las reservas.</p>';
-  else {
-    var txt = "Hola, buen día. Quisiera solicitar estas reservas para mi familia (reserva de grupo de Julián Caviedes).\nNombre del titular: ____\n# de confirmación del hotel: ____\n\n";
-    wanted.forEach(function(r){
-      var a=ACT[r.x.a], pp=peopleFor(f,a);
-      txt += "• "+a.n+" — "+WFULL[r.w].toLowerCase()+" "+r.d+" de enero"+(r.x.pk?", pick up "+hm(r.x.at):", "+hm(r.x.at))+" — "+(pp.ad+pp.kids.length)+" personas ("+pp.ad+" adultos"+(pp.kids.length?", niños de "+pp.kids.map(function(k){return k.age===null?"?":k.age;}).join(" y ")+" años":"")+")\n";
+  return h;
+}
+
+/* ============ Antes de ir: guía para todo el grupo ============ */
+var TIMES = [
+ ["Dom 10","6:30 p. m.","La Xentral","Shuttle al Parque Xcaret para el Show (7:00 p. m.)"],
+ ["Lun 11","5:30 p. m.","Salida del Parque Xcaret","Volver al hotel para alistarse"],
+ ["Lun 11","6:45 p. m.","Teatro del Río (Fase 1)","Función 7:00 p. m."],
+ ["Mar 12","5:50 p. m.","La Xentral","Xoxi · pick up 6:05 p. m."],
+ ["Mié 13","9:00 a. m.","La Xentral","Xel-Há · pick up 9:15 a. m."],
+ ["Mié 13","4:50 p. m.","Bus en Xel-Há","El bus sale a las 5:00 p. m."],
+ ["Mié 13","7:00 p. m.","La Xentral","Shuttle a Xplor Fuego"],
+ ["Jue 14","9:15 a. m.","La Xentral","Catamarán · pick up 9:30 a. m."],
+ ["Jue 14","La que diga el guía","Muelle en Isla Mujeres","Regreso del catamarán"],
+ ["Jue 14","8:50 p. m.","Arriba Baja (Fase 2)","Cena 9:00 p. m."],
+ ["Vie 15","8:45 a. m.","La Xentral","Xenses · pick up 9:00 a. m."],
+ ["Vie 15","7:50 p. m.","Tama-Mon (Fase 2)","Cena 8:00 p. m."],
+ ["Sáb 16","8:35 a. m.","La Xentral","Xenotes · pick up 8:50 a. m."],
+ ["Sáb 16","6:45 p. m.","Teatro del Río (Fase 1)","Función 7:00 p. m."]
+];
+var CLOTHES = [
+ ["Teatro del Río, Arriba Baja y Tama-Mon","Resort casual. Hombres: pantalón largo o bermuda de vestir, camisa o guayabera, zapato cerrado o sandalia de vestir. Mujeres: vestido o conjunto fresco.","Nada de traje de baño, ropa mojada ni chanclas de piscina."],
+ ["Show Xcaret México Espectacular (dom 10)","Ropa fresca y zapato cómodo.","Un saco ligero para la noche."],
+ ["Parque Xcaret (lun 11)","Traje de baño debajo de la ropa, zapatos de agua o sandalias que se ajusten.","Cambio de ropa, gorra, bloqueador mineral, funda para el celular."],
+ ["Xoxi (mar 12)","Ropa cómoda y zapato cómodo.","Repelente, efectivo y un saco ligero: en la noche refresca en el agua."],
+ ["Xel-Há (mié 13)","Traje de baño, zapato cómodo.","Funda para el celular, cambio de ropa. Las toallas las da el parque."],
+ ["Xplor Fuego (mié 13)","Ropa que se pueda mojar y zapato cerrado (tenis) bien amarrado: con sandalias no dejan entrar a varias atracciones.","Cambio de ropa seca. Hay casilleros."],
+ ["Catamarán Isla Mujeres (jue 14)","Traje de baño, ropa fresca, gorra y gafas de sol.","Pasaporte físico, toalla, cambio de ropa, lonchera y efectivo."],
+ ["Xenses (vie 15)","Ropa que se pueda mojar y zapatos de agua.","Toalla y funda para el celular."],
+ ["Xenotes (sáb 16)","Traje de baño, ropa que se pueda mojar y zapatos de agua.","Funda para el celular y algo abrigado: el agua de los cenotes es fría."]
+];
+function viewGuia(){
+  var h = '<p class="lead">Lo que todo el grupo debe tener en cuenta antes de viajar. Léanlo con calma.</p>';
+  // 1. Puntualidad
+  h += '<h3>⏰ Horarios clave: el que no llegue, se queda</h3>';
+  h += '<div class="note b" style="margin:0 0 10px"><b>Regla del grupo:</b> los buses y los pick ups del hotel salen a la hora y no esperan a nadie. Hay que estar en el punto de encuentro <b>15 minutos antes</b>. El que no esté a tiempo se queda y pierde la actividad: no se retrasa a todo el grupo. Si alguien no llega, el hotel cobra no-show: US$25 por persona en los parques y MXN 600 por persona en el Teatro del Río.</div>';
+  h += '<div class="tblw"><table class="gt"><thead><tr><th>Día</th><th>Estar a las</th><th>Dónde</th><th>Para qué</th></tr></thead><tbody>'+
+    TIMES.map(function(r){ return '<tr><td class="rowh">'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>'; }).join("")+'</tbody></table></div>';
+  h += '<p class="lead" style="margin-top:8px">La Xentral queda en la Fase 1 del hotel. Calculen 10–15 min a pie desde la habitación, 25 si van con niños pequeños. Al volver de un parque: Lun 11 hay ~1 h 15 min antes del Teatro, Mié 13 ~30 min antes de Xplor Fuego, Jue 14 ~1 h antes de Arriba Baja y Sáb 16 ~1 h 30 min antes del Teatro.</p>';
+  // 2. Depósito
+  h += '<h3>💳 Depósito al hacer check-in</h3><div class="card">'+
+    '<div>• Al llegar, el hotel pide <b>un depósito en garantía por habitación</b> con tarjeta. Es una retención, no un cobro: se libera al salir, aunque el banco puede tardar unos días en reflejarlo.</div>'+
+    '<div>• El monto lo confirma el hotel. Como referencia, una agencia publica <b>unos MXN 4,000 por habitación</b>.</div>'+
+    '<div>• Mejor con <b>tarjeta de crédito</b> que de débito: con débito se retiene dinero real de la cuenta. Que tenga cupo y esté a nombre del titular de la reserva.</div>'+
+    '<div>• Avisen al banco que van a viajar a México para que no bloqueen la tarjeta.</div></div>';
+  // 3. Bloqueador
+  h += '<h3>🧴 Bloqueador solar: solo mineral</h3><div class="card">'+
+    '<div>• En los parques Xcaret (Xcaret, Xel-Há, Xenses, Xenotes, Xplor) y en el catamarán <b>solo se permite bloqueador mineral</b>: sus ingredientes activos deben ser únicamente <b>óxido de zinc</b> y/o <b>dióxido de titanio</b>.</div>'+
+    '<div>• <b>No se permiten</b> los que tengan oxibenzona (benzofenona-3), octinoxato, octocrileno, avobenzona u homosalato.</div>'+
+    '<div>• Que diga «biodegradable» o «reef safe» no basta: <b>lean los ingredientes activos</b> en la etiqueta.</div>'+
+    '<div>• En la entrada de los parques lo revisan. Si no cumple, no lo dejan pasar.</div>'+
+    '<div>• Compren el suyo antes del viaje: allá es más caro. En el hotel y en las piscinas sí pueden usar el normal.</div></div>';
+  // 4. Isla Mujeres
+  h += '<h3>🏝️ Catamarán a Isla Mujeres (jueves 14): lonchera y efectivo</h3><div class="card">'+
+    '<div>• El catamarán incluye snorkel y bebidas a bordo, pero <b>no incluye comida ni club de playa</b>.</div>'+
+    '<div>• <b>Vayan bien desayunados</b> (desayuno a las 7:45) y <b>lleven lonchera</b>: sándwiches, fruta, snacks y agua, sin envases de vidrio. Le preguntaremos a la Concierge si el hotel puede preparar el box lunch.</div>'+
+    '<div>• <b>Pasaporte físico obligatorio</b>: lo piden en el muelle de Cancún. No aceptan copia ni foto.</div>'+
+    '<div>• En la isla todo se paga aparte. Lleven <b>efectivo en pesos</b> y billetes pequeños.</div></div>';
+  h += '<p class="lead" style="margin:8px 0">Presupuesto aproximado para la playa, por persona (precios de clubes de Playa Norte; 1 US$ ≈ 17 MXN):</p>';
+  h += '<div class="tblw"><table class="gt"><thead><tr><th>Concepto</th><th>Adulto</th><th>Niño</th></tr></thead><tbody>'+
+    '<tr><td>Camastro, hamaca o sombrilla (en los clubes suele abonarse al consumo)</td><td>MXN 300–600</td><td>Comparte con los papás</td></tr>'+
+    '<tr><td>Bebidas: agua, refrescos, 2 cócteles o cervezas</td><td>MXN 350–450</td><td>MXN 100–150 (agua, refresco, jugo)</td></tr>'+
+    '<tr><td>Algo de comer además de la lonchera (snack, tacos, helado)</td><td>MXN 250–400</td><td>MXN 150–250</td></tr>'+
+    '<tr><td>Propina (10–15 %)</td><td>MXN 100–150</td><td>MXN 30–50</td></tr>'+
+    '<tr><td><b>Total aproximado</b></td><td><b>MXN 1,000–1,600</b><br>(US$60–95)</td><td><b>MXN 280–450</b><br>(US$17–27)</td></tr>'+
+    '</tbody></table></div>';
+  h += '<div class="note i"><b>Sugerencia:</b> lleven unos <b>MXN 1,500 por adulto y MXN 500 por niño</b> en efectivo. Lo que sobre sirve para souvenirs o propinas. Si se alejan del centro, el taxi o el carrito de golf se paga aparte.</div>';
+  // 5. Ropa
+  h += '<h3>👕 Qué ponerse y qué llevar en cada plan</h3><div class="tblw"><table class="gt"><thead><tr><th>Plan</th><th>Qué ponerse</th><th>Qué llevar</th></tr></thead><tbody>'+
+    CLOTHES.map(function(r){ return '<tr><td class="rowh" style="white-space:normal">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'; }).join("")+'</tbody></table></div>';
+  // 6. Niños
+  h += '<h3>👧 Niños: dónde no pueden entrar</h3><div class="card">'+
+    '<div>• <b>Xplor Fuego (mié 13):</b> desde 5 años y la mayoría de atracciones piden 1,10 m de estatura. Los menores de 5 se quedan en el hotel con un adulto o con niñera.</div>'+
+    '<div>• <b>Arriba Baja (jue 14):</b> solo adultos y mayores de 13. Pidan con tiempo el club infantil o la niñera.</div>'+
+    '<div>• <b>Xenotes (sáb 16):</b> 6 años cumplidos, sin excepción.</div>'+
+    '<div>• <b>Snorkel del catamarán:</b> desde 8 años y saber nadar.</div></div>';
+  return h;
+}
+
+/* ============ Versión para PDF / imprimir (?pdf) ============ */
+function viewPrint(){
+  var h = '<div class="pdfhead"><div class="eyebrow">Hotel Xcaret México · 10–17 enero 2027</div><h1>Plan final del grupo</h1><p>Versión final de reservas con la Concierge (16 nov 2026). Plan completo en línea: nico-parametro-git.github.io/plan-xcaret-2027</p></div>';
+  h += viewGuia();
+  h += '<h3 class="pbreak">📅 Plan día a día</h3>';
+  DAYS.forEach(function(o){
+    var d=o.d;
+    h += '<div class="pday"><h2 style="margin:14px 0 6px;font-size:1.15rem">'+WFULL[o.w]+' '+d+' de enero</h2><div class="card">';
+    SLOTS.forEach(function(sl){
+      var items=[]; (ADJ[d]||[]).forEach(function(x,i){ if(x.s===sl[0]) items.push([x,i]); });
+      if(!items.length) return;
+      var tm = items[0][0].at && !items[0][0].cont ? hm(items[0][0].at) : "";
+      h += '<div class="slot"><div class="sl">'+sl[1]+(tm?'<span class="tm">'+tm+'</span>':'')+'</div><div>';
+      items.forEach(function(p){ h += itemHTML(p[0], d, p[1], null, {}); });
+      h += '</div></div>';
     });
-    txt += "\nQuedo atento a la confirmación. ¡Gracias!";
-    h += '<textarea id="msg">'+esc(txt)+'</textarea><div><button class="btn" id="copy">Copiar mensaje</button><a class="btn sec" href="https://wa.me/?text='+encodeURIComponent(txt)+'" target="_blank" rel="noopener">Abrir en WhatsApp</a></div>';
-  }
+    h += '</div></div>';
+  });
   return h;
 }
 
@@ -602,12 +706,14 @@ function viewGrupo(){
 
 function render(){
   renderTabs();
-  var v = S.tab==="grupo"?viewGrupo(): S.tab==="tabla"?viewTabla(): S.tab==="notas"?viewNotas(): S.tab==="reservas"?viewReservas(): S.tab==="info"?viewInfo(): viewDia();
+  if(PRINT){ document.getElementById("view").innerHTML = viewPrint(); return; }
+  var v = S.tab==="grupo"?viewGrupo(): S.tab==="guia"?viewGuia(): S.tab==="tabla"?viewTabla(): S.tab==="notas"?viewNotas(): S.tab==="reservas"?viewReservas(): S.tab==="info"?viewInfo(): viewDia();
   document.getElementById("view").innerHTML = v;
   save();
 }
 
 /* ============ Eventos ============ */
+if(PRINT){ document.body.className="print"; document.title="Plan final Xcaret 2027 - Grupo"; }
 if(HOTEL){
   document.getElementById("who").style.display="none";
   document.getElementById("h1").textContent="Plan del grupo · Julián Caviedes";
